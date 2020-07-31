@@ -423,17 +423,13 @@
                     echo "Connection failed: " . $e->getMessage();
                   }
 
-
-
-
-
-
-                  $query= $conn->prepare("SELECT * FROM author");
+                  $query = $conn-> prepare("SELECT * FROM author");
                   $query->execute();
-                  $result = $query->fetchAll();
 
+                  while($row = $query-> fetch()) {
+                        echo "<div>". $row["last_name"]. "</div>";
+                  }
 
-                  var_dump($result);
 
 
                   ?>
