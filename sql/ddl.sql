@@ -13,7 +13,7 @@ DROP TABLE
     posting_category,
     application,
     search,
-    employer_search
+    employer_search,
     job_seeker_search,
     posting_search,
     application_search;
@@ -59,7 +59,7 @@ CREATE TABLE telephone (
         ON DELETE CASCADE
 );
 
-CREATE TABLE payment-method (
+CREATE TABLE payment_method (
     user_id BIGINT,
     method_id BIGINT,
     account_number VARCHAR(255) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE payment (
     user_id BIGINT, -- user_id = bill[bill_id].user_id should be true; easier to implement elsewher
     method_id BIGINT,
     bill_id BIGINT
-    payment_amount DECIMAL (5, 2) NOT NULL,
+    payment_amount DECIMAL(5, 2) NOT NULL,
     payment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (payment_id),
     FOREIGN KEY (user_id, method_id)
