@@ -99,7 +99,7 @@ CREATE TABLE employer (
     employer_id BIGINT,
     employer_name VARCHAR(255) NOT NULL,
     description VARCHAR(2047),
-    employer_tier INT CHECK (employer_tier > -1 AND employer_tier < 2) NOT NULL
+    employer_tier INT CHECK (employer_tier > -1 AND employer_tier < 2) NOT NULL,
     PRIMARY KEY (employer_id),
     FOREIGN KEY (employer_id)
         REFERENCES users (user_id)
