@@ -142,7 +142,7 @@ CREATE TABLE application (
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
         ON DELETE CASCADE,
-    FOREIGN KEY (employee_id, posting_id)
+    FOREIGN KEY (employer_id, posting_id)
         REFERENCES posting (employer_id, posting_id)
         ON DELETE CASCADE
 );
@@ -152,7 +152,7 @@ CREATE TABLE search (
     user_id BIGINT,
     input VARCHAR(255) NOT NULL,
     search_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (serach_id),
+    PRIMARY KEY (search_id),
     FOREIGN KEY (user_id)
         REFERENCES users(user_id)
         ON DELETE SET NULL
@@ -163,7 +163,7 @@ CREATE TABLE search (
 CREATE TABLE employer_search (
     employer_id BIGINT,
     search_id BIGINT,
-    PRIMARY KEY (employer_id, search_id).
+    PRIMARY KEY (employer_id, search_id),
     FOREIGN KEY (employer_id)
         REFERENCES employer (employer_id)
         ON DELETE CASCADE,
@@ -174,7 +174,7 @@ CREATE TABLE employer_search (
 CREATE TABLE job_seeker_search (
     job_seeker_id BIGINT,
     search_id BIGINT,
-    PRIMARY KEY (job_seeker_id, search_id).
+    PRIMARY KEY (job_seeker_id, search_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
         ON DELETE CASCADE,
@@ -186,7 +186,7 @@ CREATE TABLE posting_search (
     employer_id BIGINT,
     posting_id BIGINT,
     search_id BIGINT,
-    PRIMARY KEY (employer_id, posting_id, search_id).
+    PRIMARY KEY (employer_id, posting_id, search_id),
     FOREIGN KEY (employer_id, posting_id)
         REFERENCES posting (employer_id, posting_id)
         ON DELETE CASCADE,
@@ -198,7 +198,7 @@ CREATE TABLE application_search (
     job_seeker_id BIGINT,
     application_id BIGINT,
     search_id BIGINT,
-    PRIMARY KEY (job_seeker_id, application_id, search_id).
+    PRIMARY KEY (job_seeker_id, application_id, search_id),
     FOREIGN KEY (job_seeker_id, application_id)
         REFERENCES application (job_seeker_id, application_id)
         ON DELETE CASCADE,
