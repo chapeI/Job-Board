@@ -1,4 +1,4 @@
-DROP TABLE
+DROP TABLE IF EXISTS
     admin,
     users,
     address,
@@ -83,7 +83,7 @@ CREATE TABLE payment (
     payment_id BIGINT AUTO_INCREMENT,
     user_id BIGINT, -- user_id = bill[bill_id].user_id should be true; easier to implement elsewher
     method_id BIGINT,
-    bill_id BIGINT
+    bill_id BIGINT,
     payment_amount DECIMAL(5, 2) NOT NULL,
     payment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (payment_id),
