@@ -23,7 +23,6 @@ CREATE TABLE admin (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (admin_id)
-    -- TODO make foreign key constraint from admin_id to users.user-id?
 );
 
 CREATE TABLE users (
@@ -33,7 +32,6 @@ CREATE TABLE users (
     PRIMARY KEY (user_id)
 );
 
--- Optional user address information (employers should be required to have at least one entry)
 CREATE TABLE address (
     user_id BIGINT,
     street_number INT,
@@ -49,7 +47,6 @@ CREATE TABLE address (
         ON DELETE CASCADE
 );
 
--- Optional user contact information (employers should be required to have at least one entry)
 CREATE TABLE telephone (
     user_id BIGINT,
     phone_number VARCHAR(255),
@@ -82,7 +79,7 @@ CREATE TABLE bill (
 
 CREATE TABLE payment (
     payment_id BIGINT AUTO_INCREMENT,
-    user_id BIGINT, -- user_id = bill[bill_id].user_id should be true; easier to implement elsewher
+    user_id BIGINT,
     method_id BIGINT,
     bill_id BIGINT,
     payment_amount DECIMAL(5, 2) NOT NULL,
