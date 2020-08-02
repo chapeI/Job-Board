@@ -364,21 +364,41 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>ISBN</th>
+                      <th>User ID</th>
+                      <th>Email</th>
+                      <th>Password</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>ISBN</th>
+                      <th>User ID</th>
+                      <th>Email</th>
+                      <th>Password</th>
                     </tr>
                   </tfoot>
                   <tbody>
 
+                  <?php
+                  $servername = "iyc353.encs.concordia.ca";
+                  $username = "iyc353_1";
+                  $password = "folklore";
 
+                  try {
+                    $conn = new PDO("mysql:host=$servername;dbname=iyc353_1", $username, $password);
+                    // set the PDO error mode to exception
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                  echo "DEBUG: successfully retrieving data";
+                  } catch(PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                  }
+
+                  $query = $conn-> prepare("SELECT * FROM users");
+                  $query->execute();
+
+                  while($row = $query-> fetch()) {
+                        echo "<tr><td>". $row["user_id"]. "</td><td>". $row["email"]. "</td><td>". $row["password"]. "</td></tr>";
+                  }
+                  ?>
                   </tbody>
                 </table>
               </div>
@@ -390,52 +410,6 @@
 
       </div>
       <!-- End of Main Content -->
-
-
-
-<table>
-    <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>ISBN</th>
-    </tr>
-
-
-</table>
-
-
-
-
-
-
-
-                  <?php
-                  $servername = "iyc353.encs.concordia.ca";
-                  $username = "iyc353_1";
-                  $password = "folklore";
-
-                  try {
-                    $conn = new PDO("mysql:host=$servername;dbname=iyc353_1", $username, $password);
-                    // set the PDO error mode to exception
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  echo "success?";
-                  } catch(PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                  }
-
-                  $query = $conn-> prepare("SELECT * FROM author");
-                  $query->execute();
-
-                  while($row = $query-> fetch()) {
-                        echo "<div>". $row["last_name"]. "</div>";
-                  }
-
-
-
-                  ?>
-
-
-
 
 
       <!-- Footer -->
