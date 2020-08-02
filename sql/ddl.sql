@@ -36,13 +36,14 @@ CREATE TABLE users (
 -- Optional user address information (employers should be required to have at least one entry)
 CREATE TABLE address (
     user_id BIGINT,
-    street VARCHAR(127),
-    city VARCHAR(127),
-    state VARCHAR(127),
-    country VARCHAR(127),
-    postal_code VARCHAR(127),
-    designation VARCHAR(127),
-    PRIMARY KEY (user_id, street, city, state, country, postal_code),
+    street_number INT,
+    street_name VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    postal_code VARCHAR(255),
+    designation VARCHAR(255),
+    PRIMARY KEY (user_id, street_number, street_name, city, state, country),
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
