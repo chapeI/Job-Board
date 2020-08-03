@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS
     bill,
     payment,
     employer,
+    employer_category
     job_seeker,
     posting,
     category,
@@ -105,18 +106,13 @@ CREATE TABLE employer (
         ON DELETE CASCADE
 );
 
-CREATE TABLE category (
-    name VARCHAR(255) PRIMARY KEY
-)
-
 CREATE TABLE employer_category (
     employer_id BIGINT.
     category VARCHAR(255),
     PRIMARY KEY (employer_id, category),
     FOREIGN KEY (employer_ID)
-        REFERENCES employer (employer_id),
-    FORIEGN KEY (category)
-        REFERENCES category (name)
+        REFERENCES employer (employer_id)
+        ON DELETE CASCADE
 )
 
 CREATE TABLE job_seeker (
@@ -151,7 +147,7 @@ CREATE TABLE application (
     employer_id BIGINT,
     posting_id BIGINT,
     application_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    accepted_time DATETIME,
+    offer_time DATETIME DEFAULT NULL,
     PRIMARY KEY (job_seeker_id, application_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
