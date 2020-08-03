@@ -61,6 +61,7 @@ CREATE TABLE payment_method (
     user_id BIGINT,
     method_id BIGINT,
     account_number VARCHAR(255) NOT NULL,
+    is_automatic BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (user_id, method_id),
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
@@ -104,6 +105,20 @@ CREATE TABLE employer (
         ON DELETE CASCADE
 );
 
+CREATE TABLE category (
+    name VARCHAR(255) PRIMARY KEY
+)
+
+CREATE TABLE employer_category (
+    employer_id BIGINT.
+    category VARCHAR(255),
+    PRIMARY KEY (employer_id, category),
+    FOREIGN KEY (employer_ID)
+        REFERENCES employer (employer_id),
+    FORIEGN KEY (category)
+        REFERENCES category (name)
+)
+
 CREATE TABLE job_seeker (
     job_seeker_id BIGINT,
     first_name VARCHAR(255) NOT NULL,
@@ -136,6 +151,7 @@ CREATE TABLE application (
     employer_id BIGINT,
     posting_id BIGINT,
     application_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    accepted_time DATETIME,
     PRIMARY KEY (job_seeker_id, application_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
