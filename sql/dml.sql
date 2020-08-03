@@ -1,19 +1,20 @@
-DELETE FROM admin;
-DELETE FROM users;
-DELETE FROM address;
-DELETE FROM telephone;
-DELETE FROM payment_method;
-DELETE FROM bill;
-DELETE FROM payment;
-DELETE FROM employer;
-DELETE FROM job_seeker;
-DELETE FROM posting;
-DELETE FROM application;
-DELETE FROM search;
-DELETE FROM employer_search;
-DELETE FROM job_seeker_search;
-DELETE FROM posting_search;
 DELETE FROM application_search;
+DELETE FROM posting_search;
+DELETE FROM job_seeker_search;
+DELETE FROM employer_search;
+DELETE FROM search;
+DELETE FROM application;
+DELETE FROM posting;
+DELETE FROM job_seeker;
+DELETE FROM employer;
+DELETE FROM payment;
+DELETE FROM bill;
+DELETE FROM payment_method;
+DELETE FROM telephone;
+DELETE FROM address;
+DELETE FROM users;
+DELETE FROM admin;
+
 
 INSERT INTO admin (admin_id, email, password)
     VALUES (1, 'pcommander0@miitbeian.gov.cn', 'SkooM8d9mDD');
