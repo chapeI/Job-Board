@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS
     bill,
     payment,
     employer,
+    category,
+	employer_category,
     job_seeker,
     posting,
-    category,
-    posting_category,
     application,
     search,
     employer_search,
@@ -35,12 +35,12 @@ CREATE TABLE users (
 CREATE TABLE address (
     user_id BIGINT,
     street_number INT,
-    street_name VARCHAR(255),
-    city VARCHAR(255),
-    state VARCHAR(255),
-    country VARCHAR(255),
-    postal_code VARCHAR(255),
-    designation VARCHAR(255),
+    street_name VARCHAR(127),
+    city VARCHAR(127),
+    state VARCHAR(127),
+    country VARCHAR(127),
+    postal_code VARCHAR(127),
+    designation VARCHAR(127),
     PRIMARY KEY (user_id, street_number, street_name, city, state, country),
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
@@ -107,17 +107,18 @@ CREATE TABLE employer (
 
 CREATE TABLE category (
     name VARCHAR(255) PRIMARY KEY
-)
+);
 
 CREATE TABLE employer_category (
-    employer_id BIGINT.
+    employer_id BIGINT,
     category VARCHAR(255),
     PRIMARY KEY (employer_id, category),
     FOREIGN KEY (employer_ID)
         REFERENCES employer (employer_id),
-    FORIEGN KEY (category)
+    FOREIGN KEY (category)
         REFERENCES category (name)
-)
+        ON DELETE CASCADE
+);
 
 CREATE TABLE job_seeker (
     job_seeker_id BIGINT,
