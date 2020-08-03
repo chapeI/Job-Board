@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS
     bill,
     payment,
     employer,
-    employer_category
+    employer_category,
     job_seeker,
     posting,
     application,
