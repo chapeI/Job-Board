@@ -167,7 +167,7 @@ WHERE category = <input>
 SELECT posting_time, close_time, title, description, number_of_openings
 FROM posting
 WHERE title LIKE '%{input}%' OR description LIKE '%{input}%'
-    AND employer_id IN ( -- to prevent the inclusion of postings from deleted employers
+    AND employer_id IN ( -- to exclude postings from deleted employers
         SELECT employer_id
         FROM employer);
 
