@@ -28,6 +28,7 @@ CREATE TABLE users (
     user_id BIGINT AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    frozen_time DATETIME DEFAULT NULL,
     PRIMARY KEY (user_id)
 );
 
@@ -81,16 +82,12 @@ CREATE TABLE payment (
     payment_id BIGINT AUTO_INCREMENT,
     user_id BIGINT,
     method_id BIGINT,
-    bill_id BIGINT,
     payment_amount DECIMAL(5, 2) NOT NULL,
     payment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (payment_id),
     FOREIGN KEY (user_id, method_id)
         REFERENCES payment_method (user_id, method_id)
         ON DELETE SET NULL,
-    FOREIGN KEY (bill_id)
-        REFERENCES bill (bill_id)
-        ON DELETE CASCADE
 );
 
 CREATE TABLE employer (
@@ -102,6 +99,7 @@ CREATE TABLE employer (
     FOREIGN KEY (employer_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE employer_category (
@@ -123,6 +121,7 @@ CREATE TABLE job_seeker (
     FOREIGN KEY (job_seeker_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE posting (
