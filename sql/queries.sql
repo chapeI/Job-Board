@@ -10,7 +10,7 @@ INSERT INTO employer (employer_name, employer_tier)
 
 -- delete employer, given id
 UPDATE users
-SET password = password * -1 -- cascades to employer; postings, categories, and applications cannot be resolved
+SET password = password * -1 -- cascades to employer; categories, postings, and applications cannot be resolved
 WHERE user_id = <id>;
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -25,8 +25,8 @@ WHERE employer_id = <id>;
 -- report employer information, given id
 SELECT employer_name, description, email
 FROM employer, users
-WHERE employer_id = user_id
-    AND employer_id = <id>;
+WHERE employer_id = <id>;
+    AND employer_id = user_id
 
 --report employer address(es) and phone number(s) (see utilities)
 
@@ -88,7 +88,7 @@ FROM posting
 WHERE employer_id = <employer id>
     AND posting_id = <posting id>;
 
--- report applicant informationm given employer id and posting id
+-- report applicant information given employer id and posting id
 SELECT first_name, last_name, application_time, offer_time, close_time
 FROM job_seeker, application, posting
 WHERE employer_id = <employer_id>
@@ -112,7 +112,7 @@ FROM posting, application
 WHERE posting.employer_id = <employer id>
     AND application.employer_id = <employer id>
     AND posting.posting_id = application.posting_id
-    AND posting_time BETWEEN <origin time> AND <bound time>
+    AND posting_time BETWEEN <origin> AND <bound>
 GROUP BY title, description, posting_time, number_of_applicants;
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -245,7 +245,7 @@ FROM posting, application
 WHERE job_seeker_id = <job-seeker id>
     AND posting.employer_id = application.employer_id
     AND posting.posting_id = posting.posting_id
-    AND application_time BETWEEN <origin time> AND <bound time>;
+    AND application_time BETWEEN <origin> AND <bound>;
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -310,7 +310,7 @@ SELECT *
 FROM employer_category;
 
 -- report job-seeker administrative information
-SELECT first_name, last_name, email, frozen_time AS status, 
+SELECT first_name, last_name, email, frozen_time AS status, balance
 FROM job_seeker, users, balance
 WHERE job_seeker_id = users.user_id
     AND users.user_id = balance.user_id;
