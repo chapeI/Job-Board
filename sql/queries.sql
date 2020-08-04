@@ -10,7 +10,7 @@ INSERT INTO employer (employer_name, employer_tier)
 
 -- delete employer, given id
 UPDATE users
-SET password = password * -1
+SET password = password * -1 -- cascades to employer; postings, categories, and applications cannot be resolved
 WHERE user_id = <id>;
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -100,13 +100,13 @@ WHERE employer_id = <employer_id>
 
 -- vi ------------------------------------------------------------------------------------------------------------------
 
--- report of posted jobs, given employer id, origin time, and bound time
+-- report posted jobs, given employer id, origin time, and bound time
 SELECT title, description, posting_time, number_of_openings,
     COUNT( SELECT job_seeker_id, application_id
         FROM application) AS number_of_applicants,
     COUNT(SELECT job_seeker_id, application_id
         FROM application
-        WHERE application_time IS NOT NULL
+        WHERE application_time IS '1000-01-01 00:00:00' -- sentinel for accepted offer
             AND offer_time IS NOT NULL) AS number_of_accepted_offers
 FROM posting, application
 WHERE posting.employer_id = <employer id>
@@ -127,7 +127,7 @@ INSERT INTO job_seeker (first_name, last_name, job_seeker_tier)
 
 -- delete job-seeker, given id
 UPDATE users
-SET password = password * -1
+SET password = password * -1 -- cascades to job-seeker; applications cannot be resolved
 WHERE user_id = <id>
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ WHERE category = <input>
 -- search for jobs assuming input is a substring of posting title or description
 SELECT posting_time, close_time, title, description, number_of_openings
 FROM posting
-WHERE title LIKE '%{input}' OR description LIKE '%{input}%'
+WHERE title LIKE '%{input}%' OR description LIKE '%{input}%'
     AND employer_id IN ( -- to prevent the inclusion of postings from deleted employers
         SELECT employer_id
         FROM employer);
@@ -196,13 +196,13 @@ INSERT INTO application (job_seeker_id, application_id, employer_id, posting_id)
 
 -- accept a job offer, given job-seeker id and application id
 UPDATE application
-SET application_time = '1000-01-01 00:00:00'
+SET application_time = '1000-01-01 00:00:00' -- 'When can you start?' 'YESTERDAY!'
 WHERE job_seeker_id = <job-seeker id>
     AND application_id = <application id>;
 
 -- reject a job offer, given job-seeker if and application id
 UPDATE application
-SET application_time = '9999-12-31 23:59:59'
+SET application_time = '9999-12-31 23:59:59' -- 'When can you start?' 'When hell freezes over.'
 WHERE job_seeker_id = <job-seeker id>
     AND application_id = <application id>;
 
@@ -337,12 +337,6 @@ WHERE balance < 0
 
 -- utilities ----------------------------------------------------------------------------------------------------------
 
--- virtual balances table
-CREATE VIEW user_balance
-    SELECT payment.user_id, SUM(payment_amount) - SUM(bill_amount) AS balance
-    FROM payment, bill
-    WHERE payment.user_id = bill.user_id;
-
 -- report address(es), given id
 SELECT street_number, street_name, city, state, country, postal_code, designation
 FROM address
@@ -352,3 +346,9 @@ WHERE user_id = <id>;
 SELECT phone_number, designation
 FROM phone
 WHERE user_id = <id>;
+
+-- virtual balances table
+CREATE VIEW user_balance
+    SELECT payment.user_id, SUM(payment_amount) - SUM(bill_amount) AS balance
+    FROM payment, bill
+    WHERE payment.user_id = bill.user_id;
