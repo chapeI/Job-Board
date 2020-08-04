@@ -165,8 +165,6 @@ CREATE TABLE search (
         ON DELETE SET NULL
 );
 
--- TODO consider adding an activity table to promote search result polymorphism
-
 CREATE TABLE employer_search (
     employer_id BIGINT,
     search_id BIGINT,
