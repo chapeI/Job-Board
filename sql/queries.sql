@@ -178,7 +178,7 @@ INSERT INTO search (user_id, input)
 -- add previous search results (denoted here A, B, C) to posting-search table, given search id
 INSERT INTO posting_search (employer_id, posting_id, search_id)
     SELECT employer_id, posting_id, <search_id>
-    FROM <A> UNION <B> UNION <C>;
+    FROM <A> UNION <B> UNION <C>; -- distinct would be more expensive and obliterate result frequency information
 
 -----------------------------------------------------------------------------------------------------------------------
 
