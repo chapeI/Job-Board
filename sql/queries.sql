@@ -301,7 +301,7 @@ WHERE user_id = <id>;
 
 -- report employer administrative information
 SELECT employer_name, email, frozen_time AS status, balance
-FROM employer, users, balance
+FROM employer, users, user_balance
 WHERE employer_id = users.user_id
     AND users.user_id = balance.user_id;
 
@@ -311,7 +311,7 @@ FROM employer_category;
 
 -- report job-seeker administrative information
 SELECT first_name, last_name, email, frozen_time AS status, balance
-FROM job_seeker, users, balance
+FROM job_seeker, users, user_balance
 WHERE job_seeker_id = users.user_id
     AND users.user_id = balance.user_id;
 
@@ -321,14 +321,14 @@ WHERE job_seeker_id = users.user_id
 
 -- report employers with negative balances
 SELECT employer_name, email, balance, frozen_time
-FROM employer, users, balance
+FROM employer, users, user_balance
 WHERE balance < 0
     AND employer_id = users.user_id
     AND users.user_id = balance.user_id;
 
 -- report employees with negative balances
 SELECT first_name, last_name, email, balance, frozen_time
-FROM job_seeker, users, balance
+FROM job_seeker, users, user_balance
 WHERE balance < 0
     AND job_seeker_id = users.user_id
     AND users.user_id = balance.user_id;
