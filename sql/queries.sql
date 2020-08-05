@@ -2,9 +2,11 @@
 
 -----------------------------------------------------------------------------------------------------------------------
 
--- create employer, given name and tier
-INSERT INTO employer (employer_name, employer_tier)
-    Values (<name>, <tier>);
+-- create use (see utilities)
+
+-- create employer, given id, name, and tier
+INSERT INTO employer (employer_id, employer_name, employer_tier)
+    VALUES (<id>, <name>, <tier>);
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -119,11 +121,15 @@ GROUP BY title, description, posting_time, number_of_applicants;
 
 -- vii ----------------------------------------------------------------------------------------------------------------
 
+-- create user given email and password
+
 -- create job-seeker, given first name, last name, and tier
 INSERT INTO job_seeker (first_name, last_name, job_seeker_tier)
     VALUES (<fname>, <lname>, <tier>);
 
 -----------------------------------------------------------------------------------------------------------------------
+
+-- create use (see utilities)
 
 -- delete job-seeker, given id
 UPDATE users
@@ -336,6 +342,10 @@ WHERE balance < 0
 -----------------------------------------------------------------------------------------------------------------------
 
 -- utilities ----------------------------------------------------------------------------------------------------------
+
+-- create user, given email and password
+INSERT INTO users (email, password)
+    VALUES (<email>, <password>);
 
 -- report address(es), given id
 SELECT street_number, street_name, city, state, country, postal_code, designation
