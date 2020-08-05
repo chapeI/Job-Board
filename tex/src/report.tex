@@ -137,41 +137,40 @@
                     digits and two digits of precision after its decimal point.
                 \item All other attributes are arbitrary character strings.
             \end{itemize}
-            \subsection{Default Values}
-                Most attributes do not have a defined default value. However, temporal attributes for the most part
-                default to the current value of the system clock. Exceptionally the $frozen\tdash time$, $close \tdash
-                time$, and $offer \tdash time$ attributes of the $user$, $posting$, and $application$ relations
-                respectively default to null. $frozen \tdash time$ indicates the moment at which an account went into
-                arrears by virtue of keeping a negative balance for a prescribed period of time after the most recently
-                issued bill. It is reset to null every time a user brings their balance to a non-negative value. The
-                other two attributes should generally only be modified once an employer has closed a posting and made
-                an offer to an applicant respectively. The default value of the $is\tdash automatic$ attribute on the
-                $payment \tdash method$ relation is false.
-            \subsection{Nullity Constraints}
-                Table \ref{tab:non_null} lists the attributes from the relations listed in Figure \ref{fig:schema} that
-                may not hold null values. Primary and foreign keys are not listed for the sake of brevity but also may
-                not be null. \par
-                \begin{table}[h]
-                    \centering
-                    \begin{tabular}{|l|l|}
-                        \hline
-                        \textbf{Relation}   & \textbf{Attribute}                              \\ \hline
-                        \textit{admin}      & \textit{email, password}                        \\ \hline
-                        \textit{user}       & \textit{email, password}                        \\ \hline
-                        \textit{payment}    & \textit{account-number}                         \\ \hline
-                        \textit{bill}       & \textit{bill-amount, bill-time}                 \\ \hline
-                        \textit{payment}    & \textit{payment-amount, payment-time}           \\ \hline
-                        \textit{employer}   & \textit{employer-name, employer-tier}           \\ \hline
-                        \textit{job-seeker} & \textit{first-name, last-name, job-seeker-tier} \\ \hline
-                        \textit{posting}    & \textit{posting-time, title, description}       \\ \hline
-                        \textit{search}     & \textit{input, search-time}                     \\ \hline
-                    \end{tabular}
-                    \caption{Non-null Attributes}
-                    \label{tab:non_null}
-                \end{table}
-                The constraint on the $password$ attribute on the $user$ relation may be relaxed should the scheme
-                described in \S \ref{sec:mods}, in which account deletion is signified by nullified passwords rather
-                than the physical removal of user tuples, is implemented.
+        \subsection{Default Values}
+            Most attributes do not have a defined default value. However, temporal attributes for the most part default
+            to the current value of the system clock. Exceptionally the $frozen\tdash time$, $close \tdash time$, and
+            $offer \tdash time$ attributes of the $user$, $posting$, and $application$ relationsrespectively default to
+            null. $frozen \tdash time$ indicates the moment at which an account went into arrears by virtue of keeping
+            a negative balance for a prescribed period of time after the most recently issued bill. It is reset to null
+            every time a user brings their balance to a non-negative value. The other two attributes should generally
+            only be modified once an employer has closed a posting and made an offer to an applicant respectively. The
+            default value of the $is\tdash automatic$ attribute on the $payment \tdash method$ relation is false.
+        \subsection{Nullity Constraints}
+            Table \ref{tab:non_null} lists the attributes from the relations listed in Figure \ref{fig:schema} that may
+            not hold null values. Primary and foreign keys are not listed for the sake of brevity but also may not be
+            null. \par
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{|l|l|}
+                    \hline
+                    \textbf{Relation}   & \textbf{Attribute}                              \\ \hline
+                    \textit{admin}      & \textit{email, password}                        \\ \hline
+                    \textit{user}       & \textit{email, password}                        \\ \hline
+                    \textit{payment}    & \textit{account-number}                         \\ \hline
+                    \textit{bill}       & \textit{bill-amount, bill-time}                 \\ \hline
+                    \textit{payment}    & \textit{payment-amount, payment-time}           \\ \hline
+                    \textit{employer}   & \textit{employer-name, employer-tier}           \\ \hline
+                    \textit{job-seeker} & \textit{first-name, last-name, job-seeker-tier} \\ \hline
+                    \textit{posting}    & \textit{posting-time, title, description}       \\ \hline
+                    \textit{search}     & \textit{input, search-time}                     \\ \hline
+                \end{tabular}
+                \caption{Non-null Attributes}
+                \label{tab:non_null}
+            \end{table}
+            The constraint on the $password$ attribute on the $user$ relation may be relaxed should the scheme 
+            described in \S \ref{sec:mods}, in which account deletion is signified by nullified passwords rather than
+            the physical removal of user tuples, is implemented.
         \subsection{Temporal Constraints} 
             The following constraints hold on the specified attributes such that a total ordering is imposed on the
             tuples from the implicated relations.
