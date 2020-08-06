@@ -359,46 +359,40 @@
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
+            <div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>User ID</th>
-                      <th>Email</th>
-                      <th>Password</th>
+                      <th>Employer</th>
+                      <th>Time Posted</th>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Number of Openings</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>User ID</th>
-                      <th>Email</th>
-                      <th>Password</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
-
-                  <?php
-                  $servername = "iyc353.encs.concordia.ca";
-                  $username = "iyc353_1";
-                  $password = "folklore";
-
-                  try {
-                    $conn = new PDO("mysql:host=$servername;dbname=iyc353_1", $username, $password);
-                    // set the PDO error mode to exception
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  echo "DEBUG: successfully retrieving data";
-                  } catch(PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                  }
-
-                  $query = $conn-> prepare("SELECT * FROM users");
-                  $query->execute();
-
-                  while($row = $query-> fetch()) {
-                        echo "<tr><td>". $row["user_id"]. "</td><td>". $row["email"]. "</td><td>". $row["password"]. "</td></tr>";
-                  }
-                  ?>
+                    <?php
+                        $servername = "127.0.0.1"; // Change this to iyc353.encs.concordia.ca if you have trouble connecting
+                        $username = "iyc353_1";
+                        $password = "folklore";
+                        try {
+                            $conn = new PDO("mysql:host=$servername;dbname=iyc353_1", $username, $password);
+                            // set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            echo "DEBUG: successfully retrieving data";
+                        } catch(PDOException $e) {
+                            echo "Connection failed: " . $e->getMessage();
+                        }
+                        $query_string = "SELECT employer_name, posting_time, title, posting.description, number_of_openings FROM employer JOIN posting";
+                        $query = $conn-> prepare($query_string);
+                        $query->execute();
+                        while($row = $query-> fetch()) {
+                            echo "<tr><td>". $row["employer_name"]. "</td><td>". $row["posting_time"]. "</td><td>". $row["title"].
+                                "</td><td>". $row["description"]. "</td><td>". $row["number_of_openings"]. "</td></tr>";
+                        }
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -472,3 +466,4 @@
 </body>
 
 </html>
+±
