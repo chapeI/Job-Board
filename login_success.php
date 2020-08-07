@@ -1,14 +1,13 @@
 <?php
+ session_start();
 
-echo 'debug1';
-
-session_start();
-echo 'debug2';
-
-if(isset($_SESSION["username"]))
-{
-    echo 'debug3';
-    echo '<h3>login success, welcome '._SESSION["username"].'</h3>';
-}
-
-?>
+ if(isset($_SESSION))
+ {
+      echo '<h3>Login Success, Welcome - '.$_SESSION["username"].'</h3>';
+      echo '<br /><br /><a href="logout.php">Logout</a><br/>';
+ }
+ else
+ {
+    echo "no guac";
+ }
+ ?>

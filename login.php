@@ -1,4 +1,5 @@
 <?php
+session_start();
                   $servername = "iyc353.encs.concordia.ca";
                   $username = "iyc353_1";
                   $password = "folklore";
@@ -12,23 +13,30 @@
 
                     if(isset($_POST["login"]))
                     {
-
-                        $query = "SELECT * FROM admin WHERE username= :username AND password = :password";
+                        $username = $_POST['username'];
+                        $password = $_POST['password'];
+                        $query = "SELECT * FROM admin WHERE admin_id= '$username' AND password = '$password'";
                         $statement = $conn->prepare($query);
                         $statement->execute(
                             array(
-                                'username' => $_POST["username"],
-                                'password' => $_POST["password"]
+                                'username' => $username,
+                                'password' => $password
                             )
                         );
                         $count = $statement->rowCount();
-                        $_SESSION["username"] = $_POST["username"];
-                        header("location:login_success.php");
+                        if($count > 0)
+                            {
+                                 $_SESSION["username"] = $username;
+                                 header("location:login_success.php");
+                            }
+                        else
+                            {
+                                 echo '<p>Wrong password or email</p>';
+                            }
                     }
                   } catch(PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
                   }
-
 
 ?>
 
@@ -56,6 +64,7 @@
 
 </head>
 
+
 <body >
 
   <div class="container">
@@ -68,13 +77,21 @@
 
       <label for="password">password : </label>
       <input type="password" name="password">
+      <input type="submit" name="login" class="btn btn-info" value="Login!" />
 
-      <button type="submit" name="login">Login</button>
-
-      New User?  <a href="registration.php">Register</a>
     </form>
 
   </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 
