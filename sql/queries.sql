@@ -362,3 +362,236 @@ CREATE VIEW user_balance
     SELECT payment.user_id, SUM(payment_amount) - SUM(bill_amount) AS balance
     FROM payment, bill
     WHERE payment.user_id = bill.user_id;
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------
+
+** ABDUL'S QUERIES **
+
+#i
+-- CREATING AN EMPLOYER
+INSERT INTO users (user_id, email, password)
+    VALUES (11, 'agohier01@booking.com', 'xpnTTJ81');
+    
+INSERT INTO employer (employer_id, employer_name, description, employer_tier)
+	VALUES (11, 'Mike', 'Front_end developer', '0');
+    
+-- EDITING AN EMPLOYER INFO
+UPDATE employer
+SET description='Full Stack Developer'
+WHERE employer_id=11;
+
+-- DISPLAYING AN EMPLOYER
+SELECT *
+FROM employer
+WHERE employer_id=11;
+
+-- DELETING AN EMPLOYER
+DELETE FROM users
+WHERE user_id=11;
+
+DELETE FROM employer
+WHERE employer_id=11;
+
+-- -----------------------------------------------------------------------
+#ii 
+-- CREATING A CATEGORY BY AN EMPLOYER
+INSERT INTO employer (employer_id, employer_name, description, employer_tier)
+	VALUES (6, 'Mike', 'Front_end developer', '0');
+INSERT INTO employer_category(employer_id, category)
+	VALUES (6, 'IT');
+    
+-- EDITING A CATEGORY BY AN EMPLOYER
+UPDATE employer_category
+SET category='Tech'
+WHERE employer_id=6;
+
+-- DISPLAYING A CATEGORY BY AN EMPLOYER
+SELECT *
+FROM employer_category
+WHERE employer_id=6;
+
+-- DELETING A CATEGORY BY AN EMPLOYER
+DELETE FROM employer_category
+WHERE employer_id=6;
+-- -----------------------------------------------------------------------
+#iii
+-- POSTING A NEW JOB BY AN EMPLOYER
+
+INSERT INTO posting(employer_id, posting_id, title, description, number_of_openings)
+	VALUES (1, 4, 'Construction worker', 'Infrastructure speaclist', 2);
+    
+-- -----------------------------------------------------------------------
+#iv
+-- Providing a job offer for an employee by an employer.
+
+UPDATE application
+SET offer_time = CURRENT_TIMESTAMP
+WHERE application_id = 1 AND job_seeker_id = 6
+    AND employer_id=1;
+
+-- -----------------------------------------------------------------------
+#v 
+-- Report of a posted job by an employer 
+
+SELECT posting.title, posting.description, date_posted, app.job_seeker_id, status
+FROM posting p, application app
+WHERE  p.posting_id=app.posting_id AND
+p.posting_id=1 AND employer_id=1;
+
+-- -----------------------------------------------------------------------
+#vi 
+-- Report of posted jobs by an employer during a specific period of time (Job
+-- title, date posted, short description of the job up to 50 characters, number
+-- of needed employees to the post, number of applied jobs to the post,
+-- number of accepted offers).
+
+SELECT posting.title, posting.date_posted, posting.description, posting.number_of_openings,
+ COUNT(application.application_id), COUNT(application.status)
+FROM posting p, application app
+WHERE p.posting_id=app.posting_id AND p.employer_id=1 AND
+ date_posted BETWEEN '2019-01-01' AND CURDATE() AND app.status='accepted';
+
+-- -----------------------------------------------------------------------
+#vii 
+-- CREATING AN EMPLOYEE
+
+INSERT INTO users (user_id, email, password)
+    VALUES (12, 'agohier011@booking.com', 'xpnTTJ811');
+    
+INSERT INTO job_seeker (job_seeker_id, first_name, last_name, description, job_seeker_tier)
+	VALUES (12, 'Jen', 'Smith', 'receptionist', 0);
+    
+-- EDITING AN EMPLOYEE INFO
+UPDATE job_seeker
+SET description='Babysitting'
+WHERE job_seeker_id=12;
+
+-- DISPLAYING AN EMPLOYEE
+SELECT *
+FROM job_seeker
+WHERE job_seeker_id=12;
+
+-- DELETING AN EMPLOYEE
+DELETE FROM users
+WHERE user_id=12;
+
+DELETE FROM job_seeker
+WHERE job_seeker_id=12;
+
+-- -----------------------------------------------------------------------
+#viii
+-- Search for a job by an employee.
+
+INSERT INTO search(search_id, user_id, input)
+	VALUES(7, 10, 'software developer');
+
+INSERT INTO job_seeker_search(job_seeker_id, search_id)
+	VALUES(10, 7);
+    
+-- -----------------------------------------------------------------------
+#ix
+-- Apply for a job by an employee
+
+INSERT INTO application(job_seeker_id, application_id, employer_id, posting_id)
+	VALUES(8, 5, 3, 2);
+     
+ -- -----------------------------------------------------------------------
+ #X
+ -- Accept/Deny a job offer by an employee
+ 
+ UPDATE application
+ SET status='accepted'
+ WHERE job_seeker_id=6 AND application.application_id=1;
+ 
+ -- -----------------------------------------------------------------------
+#xi
+-- Withdraw from an applied job by an employee
+
+UPDATE application
+ SET status='withdrawn'
+ WHERE job_seeker_id=6 AND application.application_id=1;
+ 
+-- -----------------------------------------------------------------------
+#xii
+-- Delete a profile by an employee
+
+DELETE FROM application
+WHERE job_seeker_id=6 AND application.application_id=1;
+
+-- -----------------------------------------------------------------------
+#xiii
+
+-- Report of applied jobs by an employee during a specific period of time
+-- (Job title, date applied, short description of the job up to 50 characters,
+-- status of the application).
+
+
+SELECT posting.title, posting.date_posted, posting.description, application.status
+FROM posting p, application app
+WHERE p.posting_id=app.posting_id AND app.job_seeker_id=6 AND
+ date_posted BETWEEN '2019-01-01' AND CURDATE();
+
+-- -----------------------------------------------------------------------
+#xiv
+-- Add/Delete/Edit a method of payment by a user
+
+-- Adding another method of payment
+INSERT INTO payment_method (user_id, method_id, account_number)
+    VALUES (1, 2, '34-175-9681');
+
+-- EDITING A METHOD OF PAYMENT
+UPDATE payment_method
+SET account_number='24-175-9681'
+WHERE user_id=1 AND method_id=2;
+
+-- DELETING A METHOD OF PAYMENT
+DELETE FROM payment_method
+WHERE user_id=1 AND method_id=2;
+
+-- -----------------------------------------------------------------------
+#xv
+-- Add/Delete/Edit an automatic payment by a user.
+
+-- ADDING AND EDITING AN AUTOMATIC PAYMENT
+UPDATE payment_method
+SET is_automatic=TRUE 
+WHERE user_id=1 AND method_id=1;
+
+-- DELETING AN AUTOMATIC PAYMENT
+UPDATE payment_method
+SET is_automatic=FALSE 
+WHERE user_id=1 AND method_id=1;
+
+-- -----------------------------------------------------------------------
+#xvi
+-- Make a manual payment by a user
+
+INSERT INTO payment (payment_id, user_id, payment_amount)
+    VALUES (9, 4, 1, 20);
+
+-- -----------------------------------------------------------------------
+#xvii
+-- Report of all users by the administrator for employers or employees
+-- (Name, email, category, status, balance)
+
+SELECT 'employer' AS employer, user_id, employer_name, email, employer_tier, SUM(bill_amount)
+FROM users u, employer e, bill b
+WHERE u.user_id=e.employer_id AND u.user_id=b.user_id
+UNION ALL
+SELECT 'job_seeker' AS job_seeker, user_id, first_name, last_name, email, job_seeker_tier, SUM(bill_amount)
+FROM users u, job_seeker j, bill b
+WHERE u.user_id=j.job_seeker_id AND u.user_id=b.user_id;
+
+-- -----------------------------------------------------------------------
+#xviii
+-- Report of all outstanding balance accounts (User name, email, balance,
+-- since when the account is suffering).
+
+SELECT 'employer' AS employer, employer_name, email, SUM(bill_amount), frozen_time
+FROM users u, bill b, employer e
+WHERE u.user_id=e.employer_id AND u.user_id=b.user_id AND SUM(bill_amount)>0
+UNION ALL
+SELECT 'job_seeker' AS job_seeker, first_name, last_name, email, SUM(bill_amount), frozen_time
+FROM users u, bill b, job_seeker j
+WHERE u.user_id=j.job_seeker_id AND u.user_id=b.user_id AND SUM(bill_amount)>0;
