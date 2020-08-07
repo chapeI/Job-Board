@@ -91,3 +91,67 @@ INSERT INTO payment (payment_id, user_id, bill_id, payment_amount)
         (6, 2, 2, 100),
         (7, 9, 9, 50),
         (8, 10, 10, 49.99);
+
+        
+INSERT INTO employer (employer_id, employer_name, description, employer_tier)
+	VALUES (1, 'Jack', 'construction', '0'),
+    (2, 'Jackson', 'industrial engineer', 1),
+    (3, 'Jill', 'physics teacher', 1),
+    (4, 'John', 'chemistry teacher', '0'),
+    (5, 'Joe', 'receptionist', '0');
+    
+    
+INSERT INTO search(search_id, user_id, input)
+	VALUES(1, 1, 'software developer'),
+    (2, 2, 'construction'),
+    (3, 3, 'physics teacher'),
+    (4, 4, 'chemistry teacher'),
+    (5, 5, 'industrial engineer'),
+    (6, 6, 'receptionist');
+    
+INSERT INTO job_seeker (job_seeker_id, first_name, last_name, description, job_seeker_tier)
+	VALUES (6, 'Jake', 'Chris', 'construction', 0),
+    (7, 'Jax', 'Christian', 'industrial engineer', 0),
+    (8, 'Jay', 'Cris', 'physics teacher', 1),
+    (9, 'Jade', 'Smith', 'chemistry teacher', 1),
+    (10, 'Jeff', 'Doe', 'software developer', 2);
+  
+INSERT INTO employer_search(employer_id, search_id)
+	VALUES (1, 2),
+    (2,5),
+    (5,6);
+    
+INSERT INTO job_seeker_search(job_seeker_id, search_id)
+	VALUES (6,5),
+    (8,3),
+    (9,4);
+    
+ INSERT INTO posting(employer_id, posting_id, title, description, number_of_openings)
+	VALUES (1, 1, 'Construction worker', 'Mining', 3),
+    (3, 2, 'Physcis teacher', 'teaching physics sec 5', 1),
+    (5, 3, 'Receptionist', 'Taking appointments and answering calls', 2);
+    
+INSERT INTO posting_search (employer_id, posting_id, search_id)
+	VALUES (1, 1, 2),
+    (3, 2, 3),
+    (5, 3, 6);
+    
+ INSERT INTO employer_category (employer_id, category)
+    VALUES (1, 'Tech'),
+    (2, 'Pharmaceutical') ,
+    (3, 'Graphic Design') ,
+    (4, 'Advertisement') ,
+    (5, 'Aerospace'); 
+    
+ -- INSERT INTO application(job_seeker_id, application_id, employer_id, posting_id)
+	 #VALUES (6, 1, 1, 1),
+     #(9, 2, 4, 2),
+     #(7, 3, 2, 3);
+    
+    #Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`job_board`.`application`, CONSTRAINT `application_ibfk_2` FOREIGN KEY (`employer_id`, `posting_id`) REFERENCES `posting` (`employer_id`, `posting_id`) ON DELETE CASCADE)
+
+    
+-- INSERT INTO application_search(job_seeker_id, application_id, search_id)
+	-- VALUES (6, 1, 2),
+	-- (9, 2, 4),
+    -- (7, 3, 5);
