@@ -38,7 +38,7 @@
 
   <div class="container" style="border: 1px solid green; margin-top: 100px">
 
-      <!--    Employer Login  -->
+      <!--    User Login  -->
       <div class="header" >
           <h2>User Login</h2>
       </div>
