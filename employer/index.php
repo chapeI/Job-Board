@@ -105,9 +105,9 @@ session_start();
 
         <!-- Nav Item - Users -->
         <li class="nav-item">
-            <a class="nav-link" href="jobs.php">
+            <a class="nav-link" href="applicants.php">
                 <i class="fas fa-fw fa-id-card"></i>
-                <span>Jobs</span></a>
+                <span>Applicants</span></a>
         </li>
 
         <!-- Nav Item - Jobs -->

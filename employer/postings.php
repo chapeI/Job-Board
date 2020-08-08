@@ -6,22 +6,22 @@ $password = "folklore";
 $dbname = "iyc353_1";
 
 try {
-$conn = new PDO("mysql:host=$servername; dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername; dbname=$dbname", $username, $password);
 // set the PDO error mode to exception
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if(isset($_POST['add_posting']))
-{
-    $employer_id = $_POST['employer_id'];
-    $posting_id = $_POST['posting_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    if(isset($_POST['add_posting']))
+    {
+        $employer_id = $_POST['employer_id'];
+        $posting_id = $_POST['posting_id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
 
-    $stmt = $conn->prepare('INSERT INTO posting (employer_id, posting_id, title, description) VALUES (?, ?, ?, ?)');
-    $stmt->execute([
-        $employer_id, $posting_id, $title, $description
-    ]);
-}
+        $stmt = $conn->prepare('INSERT INTO posting (employer_id, posting_id, title, description) VALUES (?, ?, ?, ?)');
+        $stmt->execute([
+            $employer_id, $posting_id, $title, $description
+        ]);
+    }
 
 
 
@@ -68,7 +68,7 @@ if(isset($_POST['add_posting']))
           <div class="sidebar-brand-icon rotate-n-15">
               <i class="fas fa-laugh-wink"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">Global NavBar <sup>2</sup></div>
+          <div class="sidebar-brand-text mx-3">Employer View</div>
       </a>
 
       <!-- Divider -->
@@ -110,14 +110,14 @@ if(isset($_POST['add_posting']))
       <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployer" aria-expanded="true" aria-controls="collapseEmployer">
               <i class="fas fa-fw fa-suitcase"></i>
-              <span>Employer</span>
+              <span>Employer Settings</span>
           </a>
           <div id="collapseEmployer" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">Employer Header</h6>
-                  <a class="collapse-item" href="">My Postings</a>
-                  <a class="collapse-item" href="">Applicants</a>
-                  <a class="collapse-item" href="">Interviews</a>
+                  <a class="collapse-item" href="">My Settings</a>
+                  <a class="collapse-item" href="">My Payments</a>
+                  <a class="collapse-item" href="">Contact Us</a>
               </div>
           </div>
       </li>
@@ -127,15 +127,15 @@ if(isset($_POST['add_posting']))
 
       <!-- Heading -->
       <div class="sidebar-heading">
-          Addons
+          Main Pages
       </div>
 
 
       <!-- Nav Item - Users -->
       <li class="nav-item">
-          <a class="nav-link" href="jobs.php">
+          <a class="nav-link" href="applicants.php">
               <i class="fas fa-fw fa-id-card"></i>
-              <span>Jobs</span></a>
+              <span>Applicants</span></a>
       </li>
 
       <!-- Nav Item - Jobs -->
@@ -205,111 +205,6 @@ if(isset($_POST['add_posting']))
                       </div>
                   </li>
 
-                  <!-- Nav Item - Alerts -->
-                  <li class="nav-item dropdown no-arrow mx-1">
-                      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-bell fa-fw"></i>
-                          <!-- Counter - Alerts -->
-                          <span class="badge badge-danger badge-counter">3+</span>
-                      </a>
-                      <!-- Dropdown - Alerts -->
-                      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                          <h6 class="dropdown-header">
-                              Alerts Center
-                          </h6>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                  <div class="icon-circle bg-primary">
-                                      <i class="fas fa-file-alt text-white"></i>
-                                  </div>
-                              </div>
-                              <div>
-                                  <div class="small text-gray-500">December 12, 2019</div>
-                                  <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                              </div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                  <div class="icon-circle bg-success">
-                                      <i class="fas fa-donate text-white"></i>
-                                  </div>
-                              </div>
-                              <div>
-                                  <div class="small text-gray-500">December 7, 2019</div>
-                                  $290.29 has been deposited into your account!
-                              </div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                  <div class="icon-circle bg-warning">
-                                      <i class="fas fa-exclamation-triangle text-white"></i>
-                                  </div>
-                              </div>
-                              <div>
-                                  <div class="small text-gray-500">December 2, 2019</div>
-                                  Spending Alert: We've noticed unusually high spending for your account.
-                              </div>
-                          </a>
-                          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                      </div>
-                  </li>
-
-                  <!-- Nav Item - Messages -->
-                  <li class="nav-item dropdown no-arrow mx-1">
-                      <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-envelope fa-fw"></i>
-                          <!-- Counter - Messages -->
-                          <span class="badge badge-danger badge-counter">7</span>
-                      </a>
-                      <!-- Dropdown - Messages -->
-                      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                          <h6 class="dropdown-header">
-                              Message Center
-                          </h6>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="dropdown-list-image mr-3">
-                                  <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                                  <div class="status-indicator bg-success"></div>
-                              </div>
-                              <div class="font-weight-bold">
-                                  <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                  <div class="small text-gray-500">Emily Fowler · 58m</div>
-                              </div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="dropdown-list-image mr-3">
-                                  <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                                  <div class="status-indicator"></div>
-                              </div>
-                              <div>
-                                  <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                                  <div class="small text-gray-500">Jae Chun · 1d</div>
-                              </div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="dropdown-list-image mr-3">
-                                  <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                                  <div class="status-indicator bg-warning"></div>
-                              </div>
-                              <div>
-                                  <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                                  <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                              </div>
-                          </a>
-                          <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="dropdown-list-image mr-3">
-                                  <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                                  <div class="status-indicator bg-success"></div>
-                              </div>
-                              <div>
-                                  <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                                  <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                              </div>
-                          </a>
-                          <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                      </div>
-                  </li>
-
                   <div class="topbar-divider d-none d-sm-block"></div>
 
                   <!-- Nav Item - User Information -->
@@ -359,9 +254,7 @@ if(isset($_POST['add_posting']))
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Postings</h6>
-            </div>
+
             <div>
             <div class="card-body">
               <div class="table-responsive">
@@ -403,6 +296,7 @@ if(isset($_POST['add_posting']))
                     ?>
                   </tbody>
                 </table>
+              <button style="width: 200px" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Add New Posting</button>
               </div>
             </div>
           </div>
@@ -410,22 +304,6 @@ if(isset($_POST['add_posting']))
         </div>
         <!-- /.container-fluid -->
 
-            <form method="POST">
-
-                <label for="employer_id">Employer ID : </label>
-                <input type="text" name="employer_id">
-
-                <label for="posting_id">Posting ID : </label>
-                <input type="text" name="posting_id">
-
-                <label for="title">Title : </label>
-                <input type="text" name="title">
-
-                <label for="description">Description : </label>
-                <input type="text" name="description">
-
-                <input type="submit" name="add_posting" class="btn btn-info" value="Add Posting" />
-            </form>
       </div>
       <!-- End of Main Content -->
 
@@ -459,6 +337,47 @@ if(isset($_POST['add_posting']))
       </div>
     </div>
   </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add New Posting</h5>
+                  </div>
+                  <form method="post">
+                      <div class="modal-body">
+                          <form method="POST">
+
+                              <div class="form-group">
+                              <label for="employer_id"  class="col-form-label">Employer ID : </label>
+                              <input type="text" name="employer_id" class="form-control">
+                              </div>
+
+                              <div class="form-group">
+                              <label for="posting_id"  class="col-form-label">Posting ID : </label>
+                              <input type="text" name="posting_id" class="form-control">
+                              </div>
+
+                              <div class="form-group">
+                              <label for="title"  class="col-form-label">Title : </label>
+                              <input type="text" name="title" class="form-control">
+                              </div>
+
+                              <div class="form-group">
+                              <label for="description"  class="col-form-label">Description : </label>
+                              <input type="text" name="description" class="form-control">
+                              </div>
+
+                              <input type="submit" name="add_posting" class="btn btn-info float-right" value="Add Posting" />
+                              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </form>
+                      </div>
+
+                  </form>
+              </div>
+          </div>
+      </div>
 
       <!-- Bootstrap core JavaScript-->
       <script src="../vendor/jquery/jquery.min.js"></script>
