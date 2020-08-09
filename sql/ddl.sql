@@ -1,21 +1,21 @@
 DROP TABLE IF EXISTS
-    admin,
-    users,
-    address,
-    telephone,
-    payment_method,
-    bill,
-    payment,
-    employer,
-    employer_category,
-    job_seeker,
-    posting,
-    application,
-    search,
-    employer_search,
-    job_seeker_search,
+    application_search,
     posting_search,
-    application_search;
+    job_seeker_search,
+    employer_search,
+    search,
+    application,
+    posting,
+    job_seeker,
+    employer_category,
+    employer,
+    payment,
+    bill,
+    payment_method,
+    telephone,
+    address,
+    users,
+    admin;
 
 CREATE TABLE admin (
     admin_id BIGINT AUTO_INCREMENT,
@@ -35,16 +35,16 @@ CREATE TABLE users (
 CREATE TABLE address (
     user_id BIGINT,
     street_number INT,
-    street_name VARCHAR(127),
-    city VARCHAR(127),
-    state VARCHAR(127),
-    country VARCHAR(127),
-    postal_code VARCHAR(127),
-    designation VARCHAR(127),
+    street_name VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    designation VARCHAR(255),
     PRIMARY KEY (user_id, street_number, street_name, city, state, country),
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE telephone (
@@ -55,6 +55,7 @@ CREATE TABLE telephone (
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE payment_method (
@@ -66,6 +67,7 @@ CREATE TABLE payment_method (
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE bill (
@@ -76,6 +78,7 @@ CREATE TABLE bill (
     PRIMARY KEY (bill_id),
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE payment (
@@ -87,14 +90,15 @@ CREATE TABLE payment (
     PRIMARY KEY (payment_id),
     FOREIGN KEY (user_id, method_id)
         REFERENCES payment_method (user_id, method_id)
-        ON DELETE SET NULL,
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE employer (
     employer_id BIGINT,
     employer_name VARCHAR(255) NOT NULL,
     description VARCHAR(2047),
-    employer_tier INT CHECK (employer_tier > -1 AND employer_tier < 2) NOT NULL,
+    employer_tier INT NOT NULL CHECK (employer_tier > -1 AND employer_tier < 2),
     PRIMARY KEY (employer_id),
     FOREIGN KEY (employer_id)
         REFERENCES users (user_id)
@@ -109,6 +113,7 @@ CREATE TABLE employer_category (
     FOREIGN KEY (employer_ID)
         REFERENCES employer (employer_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE job_seeker (
@@ -116,7 +121,7 @@ CREATE TABLE job_seeker (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     description VARCHAR(2047),
-    job_seeker_tier INT CHECK (job_seeker_tier > -1 AND job_seeker_tier < 3) NOT NULL,
+    job_seeker_tier INT NOT NULL CHECK (job_seeker_tier > -1 AND job_seeker_tier < 3),
     PRIMARY KEY (job_seeker_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES users (user_id)
@@ -136,6 +141,7 @@ CREATE TABLE posting (
     FOREIGN KEY (employer_id)
         REFERENCES employer (employer_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE application (
@@ -145,14 +151,15 @@ CREATE TABLE application (
     posting_id BIGINT,
     application_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     offer_time DATETIME DEFAULT NULL,
-    status VARCHAR(255) DEFAULT 'Under Review',
     PRIMARY KEY (job_seeker_id, application_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (employer_id, posting_id)
         REFERENCES posting (employer_id, posting_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE search (
@@ -164,6 +171,7 @@ CREATE TABLE search (
     FOREIGN KEY (user_id)
         REFERENCES users(user_id)
         ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE employer_search (
@@ -172,7 +180,8 @@ CREATE TABLE employer_search (
     PRIMARY KEY (employer_id, search_id),
     FOREIGN KEY (employer_id)
         REFERENCES employer (employer_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (search_id)
         REFERENCES search (search_id)
 );
@@ -183,7 +192,8 @@ CREATE TABLE job_seeker_search (
     PRIMARY KEY (job_seeker_id, search_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (search_id)
         REFERENCES search (search_id)
 );
@@ -195,7 +205,8 @@ CREATE TABLE posting_search (
     PRIMARY KEY (employer_id, posting_id, search_id),
     FOREIGN KEY (employer_id, posting_id)
         REFERENCES posting (employer_id, posting_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (search_id)
         REFERENCES search (search_id)
 );
@@ -207,7 +218,8 @@ CREATE TABLE application_search (
     PRIMARY KEY (job_seeker_id, application_id, search_id),
     FOREIGN KEY (job_seeker_id, application_id)
         REFERENCES application (job_seeker_id, application_id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (search_id)
         REFERENCES search (search_id)
 );
