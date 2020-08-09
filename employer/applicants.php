@@ -1,34 +1,5 @@
 <?php
 session_start();
-$servername = "iyc353.encs.concordia.ca";
-$username = "iyc353_1";
-$password = "folklore";
-$dbname = "iyc353_1";
-
-try {
-  $conn = new PDO("mysql:host=$servername; dbname=$dbname", $username, $password);
-// set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  if(isset($_POST['add_posting']))
-  {
-    $employer_id = $_POST['employer_id'];
-    $posting_id = $_POST['posting_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-
-    $stmt = $conn->prepare('INSERT INTO posting (employer_id, posting_id, title, description) VALUES (?, ?, ?, ?)');
-    $stmt->execute([
-        $employer_id, $posting_id, $title, $description
-    ]);
-  }
-
-
-
-
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-}
 ?>
 
 <!DOCTYPE html>
@@ -106,21 +77,21 @@ try {
       </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployer" aria-expanded="true" aria-controls="collapseEmployer">
-        <i class="fas fa-fw fa-suitcase"></i>
-        <span>Employer</span>
-      </a>
-      <div id="collapseEmployer" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Employer Header</h6>
-          <a class="collapse-item" href="">My Postings</a>
-          <a class="collapse-item" href="">Applicants</a>
-          <a class="collapse-item" href="">Interviews</a>
-        </div>
-      </div>
-    </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployer" aria-expanded="true" aria-controls="collapseEmployer">
+              <i class="fas fa-fw fa-suitcase"></i>
+              <span>Employer Settings</span>
+          </a>
+          <div id="collapseEmployer" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Employer Header</h6>
+                  <a class="collapse-item" href="">My Settings</a>
+                  <a class="collapse-item" href="payments.php">My Payments</a>
+                  <a class="collapse-item" href="">Contact Us</a>
+              </div>
+          </div>
+      </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -264,8 +235,10 @@ try {
                   <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
                     <th>Applicant Description</th>
-                    <th>Applied To Post_title</th>
+                    <th>Applied To Posting</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -282,15 +255,16 @@ try {
                     echo "Connection failed: " . $e->getMessage();
                   }
                   $employer_id = $_SESSION['employer_id'];
-                  $query_string = "SELECT first_name, last_name, job_seeker.description, title
+                  $query_string = "SELECT first_name, last_name, job_seeker.description, title, users.email
                                     FROM application 
                                         JOIN job_seeker ON (application.job_seeker_id=job_seeker.job_seeker_id) 
                                         JOIN posting ON (application.posting_id=posting.posting_id)
+                                        JOIN users ON (users.user_id=job_seeker.job_seeker_id)
                                         WHERE application.employer_id=$employer_id";
                   $query = $conn-> prepare($query_string);
                   $query->execute();
                   while($row = $query-> fetch()) {
-                    echo "<tr><td>". $row["first_name"]. "</td><td>". $row["last_name"]. "</td><td>". $row["description"].
+                    echo "<tr><td>". $row["first_name"]. "</td><td>". $row["last_name"]. "</td><td>".$row['email']."</td><td>DEBUG</td><td>". $row["description"].
                         "</td><td>". $row["title"]. "</td></tr>";
                   }
                   ?>
@@ -303,22 +277,6 @@ try {
         </div>
         <!-- /.container-fluid -->
 
-        <form method="POST">
-
-          <label for="employer_id">Employer ID : </label>
-          <input type="text" name="employer_id">
-
-          <label for="posting_id">Posting ID : </label>
-          <input type="text" name="posting_id">
-
-          <label for="title">Title : </label>
-          <input type="text" name="title">
-
-          <label for="description">Description : </label>
-          <input type="text" name="description">
-
-          <input type="submit" name="add_posting" class="btn btn-info" value="Add Posting" />
-        </form>
       </div>
       <!-- End of Main Content -->
 

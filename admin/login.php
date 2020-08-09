@@ -63,6 +63,7 @@
           $count = $statement->rowCount();
           if($count > 0)
           {
+              $_SESSION['applicant_count'] = $count;
               $_SESSION['employer_name'] = $employer_name;
               $_SESSION['employer_id'] = $employer_id;
               $_SESSION['debug'] = 'debugging';
