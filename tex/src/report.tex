@@ -1,6 +1,8 @@
 \documentclass{article}
+\usepackage{fancyvrb}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
@@ -33,6 +35,11 @@
     tabsize=2,
     upquote=true
 }
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+{fontsize=\tiny}
+\hypersetup{
+    allbordercolors=white
+}
 \newcommand{\tdash}{\textnormal{-}}
 \begin{document}
     \maketitle
@@ -54,7 +61,7 @@
                 admin(\underline{admin-id}, email, password) \\
                 user(\underline{user-id}, email, password, frozen-time) \\
                 address(\underline{user-id}, \underline{street-number}, \underline{street-name}, \underline{city},
-                \underline{state}, \underline{country}, postal-code, type) \\
+                \underline{state}, \underline{country}, type) \\
                 telephone(\underline{user-id}, \underline{phone-number}, type) \\
                 payment-method(\underline{user-id}, \underline{method-id}, account number, is-automatic) \\
                 bill(\underline{bill-id}, user-id, bill-amount, bill-time) \\
@@ -118,8 +125,8 @@
             deletion of a tuple in the $user$ relation does not result in the removal from the $search$ relation any
             tuple referencing that user. \par Keep in mind that these are not the only measures we might take to
             prevent the loss of valuable information. A protocol for deleting an account may have the corresponding
-            tuple in the $user$ relation take a null value on its $password$ attribute (or perhaps a salted value that
-            indicates deactivation so that the original password may be recovered at a later time if necessary) thus
+            tuple in the $user$ relation take a null value on its $user \tdash id$ attribute (or perhaps a salted value
+            that indicates deactivation so that the account may be recovered at a later time if necessary) thus
             obviating the need to propagate the potentially destructive effects of deleting the tuple outright. \par
             Care should be taken to prevent the deletion of a tuple from the $user$ relation for which an outstanding
             balance exists (see \S \ref{sec:etc} for a discussion on how to make such a determination). However, given
@@ -168,9 +175,6 @@
                 \caption{Non-null Attributes}
                 \label{tab:non_null}
             \end{table}
-            The constraint on the $password$ attribute on the $user$ relation may be relaxed should the scheme 
-            described in \S \ref{sec:mods}, in which account deletion is signified by nullified passwords rather than
-            the physical removal of user tuples, is implemented.
         \subsection{Temporal Constraints} 
             The following constraints hold on the specified attributes such that a total ordering is imposed on the
             tuples from the implicated relations.
@@ -198,6 +202,14 @@
             the same way that $user \tdash id$ does. Formally, $\{email, \ password\} \rightarrow user \tdash id$.
             However, since $user \tdash id$ is a key for the user relation, the relation is in 3NF. Similar reasoning
             may be applied to the $admin$ relation. Since all relations are in either BCNF or 3NF, the schema is in 3NF.
+            \par As a curiosity, notice that the address relation does not contain a seemingly obvious $postal \tdash
+            code$ attribute. This is due to the fact that a postal code is uniquely determined by the five-tuple
+            \begin{center}
+                $(street \tdash number, street \tdash name, city, state, country)$
+            \end{center}
+            and so including it would violate 3NF since $postal \tdash code$ would not belong to a key for the relation.
+            Because it is a trivial lookup and because it is tertiary to the purpose of the application, we have opted
+            to not include the attribute it in the relation or any decomposition thereof.
         \subsection{Other Considerations} \label{sec:etc}
             \par User passwords, and the account numbers associated with their various payment methods should be
             properly hashed before transmission and subsequent storage in the database, but will most likely not be due
@@ -249,5 +261,10 @@
         be added through the web interface. \lstinputlisting[firstline=18, caption=Data Insertion Statements,
         label=lst:dml]{../../sql/dml.sql} Listing \ref{lst:queries} provides the SQL statements that produce the data
         to be displayed to various users and admins of the Web Career Portal. \lstinputlisting[deletekeywords={KEY,
-        VALUE, INPUT}, caption=Queries on the Database, label=lst:queries]{../../sql/queries.sql}
+        VALUE, INPUT}, caption=Queries on the Database, label=lst:queries]{../../sql/queries.sql} The results of running
+        the queries from Listing \ref{lst:queries} on the database are shown below. \VerbatimInput{../../sql/results.txt}
+    \section{Web Interface}
+        A front end for the Web Career Portal may be found at the following link
+        \url{https://github.com/21chapel/Job-Board}. It partially implements the features and functionality to be
+        exposed to end users.
 \end{document}
