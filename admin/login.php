@@ -20,7 +20,9 @@
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM admin WHERE admin_id= '$username' AND password = '$password'";
+        $query = "SELECT * 
+                  FROM admin
+                  WHERE admin_id= '$username' AND password = '$password'";
         $statement = $conn->prepare($query);
         $statement->execute(
             array(
@@ -47,7 +49,11 @@
       {
           $employer_id = $_POST['employer_id'];
           $name = $_POST['name'];
-          $query = "SELECT * FROM employer WHERE employer_id= '$employer_id' AND employer_name = '$name'";
+          $query = "SELECT * 
+                    FROM employer
+                        JOIN bill ON (employer.employer_id=bill.user_id)
+                        JOIN payment ON (payment.user_id=employer.employer_id)
+                    WHERE employer_id= '$employer_id' AND employer_name = '$name'";
           $statement = $conn->prepare($query);
           $statement->execute(
               array(
@@ -58,13 +64,17 @@
 
           $row = $statement->fetch();
           $employer_name = $row['employer_name'];
+//          $employer_bill = $row['bill_amount'];
 
 
           $count = $statement->rowCount();
           if($count > 0)
           {
+              $_SESSION['applicant_count'] = $count;
               $_SESSION['employer_name'] = $employer_name;
               $_SESSION['employer_id'] = $employer_id;
+              $_SESSION['employer_bill'] = $row['bill_amount'];
+              $_SESSION['employer_payment'] = $row['payment_amount'];
               $_SESSION['debug'] = 'debugging';
     //                              $_SESSION['employer_name'] = 'Google';
               header('location:../employer/index.php');
