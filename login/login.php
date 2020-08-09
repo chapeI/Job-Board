@@ -181,7 +181,7 @@
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="register.html">Create User Account</a>
+                                    <a class="small" href="create_user.php">Create User Account</a>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +211,7 @@
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="register.html">Create an Employer Account</a>
+                                    <a class="small" href="create_employee.php">Create an Employer Account</a>
                                 </div>
                             </div>
                         </div>

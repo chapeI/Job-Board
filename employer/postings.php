@@ -22,10 +22,6 @@ try {
             $employer_id, $posting_id, $title, $description
         ]);
     }
-
-
-
-
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
@@ -62,7 +58,7 @@ include ('./has/head.php');
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Postings</h1>
-          <p class="mb-4">Add your new job postings here</p>
+          <p class="mb-4">Add new job postings here</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -108,7 +104,7 @@ include ('./has/head.php');
                     ?>
                   </tbody>
                 </table>
-              <button style="width: 200px" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Add New Posting</button>
+              <button style="width: 200px" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#add_posting_modal">Add New Posting</button>
               </div>
             </div>
           </div>
@@ -136,7 +132,7 @@ include ('./has/head.php');
       ?>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="add_posting_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                   <div class="modal-header">

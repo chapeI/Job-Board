@@ -22,10 +22,6 @@ try {
             $employer_id, $posting_id, $title, $description
         ]);
     }
-
-
-
-
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
@@ -62,7 +58,7 @@ include ('./has/head.php');
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Postings</h1>
-          <p class="mb-4">Add your new job postings here</p>
+          <p class="mb-4">See all job postings</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -70,7 +66,8 @@ include ('./has/head.php');
             <div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <input type="submit" name="add_posting" class="btn btn-info float-right" value="Apply to Google" />
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Employer</th>
@@ -108,7 +105,6 @@ include ('./has/head.php');
                     ?>
                   </tbody>
                 </table>
-              <button style="width: 200px" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Add New Posting</button>
               </div>
             </div>
           </div>
