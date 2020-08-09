@@ -55,7 +55,7 @@
                 <h6 class="collapse-header">Employer Header</h6>
                 <a class="collapse-item" href="">My Settings</a>
                 <a class="collapse-item" href="payments.php">My Payments</a>
-                <a class="collapse-item" href="">Contact Us</a>
+                <a class="collapse-item" href="contact.php">Contact Us</a>
             </div>
         </div>
     </li>
