@@ -93,12 +93,10 @@ include ('./has/head.php');
                         } catch(PDOException $e) {
                             echo "Connection failed: " . $e->getMessage();
                         }
-                    $employer_id = $_SESSION['employer_id'];
                     $query_string = "SELECT employer_name, posting_time, title, posting.description, 
                                     number_of_openings 
                                     FROM employer JOIN posting 
-                                    ON (posting.employer_id=employer.employer_id) 
-                                    WHERE employer.employer_id=$employer_id";
+                                    ON (posting.employer_id=employer.employer_id) ";
                         $query = $conn-> prepare($query_string);
                         $query->execute();
                         while($row = $query-> fetch()) {
@@ -136,45 +134,45 @@ include ('./has/head.php');
       ?>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add New Posting</h5>
-                  </div>
-                  <form method="post">
-                      <div class="modal-body">
-                          <form method="POST">
-
-                              <div class="form-group">
-                              <label for="employer_id"  class="col-form-label">Employer ID : </label>
-                              <input type="text" name="employer_id" class="form-control">
-                              </div>
-
-                              <div class="form-group">
-                              <label for="posting_id"  class="col-form-label">Posting ID : </label>
-                              <input type="text" name="posting_id" class="form-control">
-                              </div>
-
-                              <div class="form-group">
-                              <label for="title"  class="col-form-label">Title : </label>
-                              <input type="text" name="title" class="form-control">
-                              </div>
-
-                              <div class="form-group">
-                              <label for="description"  class="col-form-label">Description : </label>
-                              <input type="text" name="description" class="form-control">
-                              </div>
-
-                              <input type="submit" name="add_posting" class="btn btn-info float-right" value="Add Posting" />
-                              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </form>
-                      </div>
-
-                  </form>
-              </div>
-          </div>
-      </div>
+<!--      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog" role="document">-->
+<!--              <div class="modal-content">-->
+<!--                  <div class="modal-header">-->
+<!--                      <h5 class="modal-title" id="exampleModalLabel">Add New Posting</h5>-->
+<!--                  </div>-->
+<!--                  <form method="post">-->
+<!--                      <div class="modal-body">-->
+<!--                          <form method="POST">-->
+<!---->
+<!--                              <div class="form-group">-->
+<!--                              <label for="employer_id"  class="col-form-label">Employer ID : </label>-->
+<!--                              <input type="text" name="employer_id" class="form-control">-->
+<!--                              </div>-->
+<!---->
+<!--                              <div class="form-group">-->
+<!--                              <label for="posting_id"  class="col-form-label">Posting ID : </label>-->
+<!--                              <input type="text" name="posting_id" class="form-control">-->
+<!--                              </div>-->
+<!---->
+<!--                              <div class="form-group">-->
+<!--                              <label for="title"  class="col-form-label">Title : </label>-->
+<!--                              <input type="text" name="title" class="form-control">-->
+<!--                              </div>-->
+<!---->
+<!--                              <div class="form-group">-->
+<!--                              <label for="description"  class="col-form-label">Description : </label>-->
+<!--                              <input type="text" name="description" class="form-control">-->
+<!--                              </div>-->
+<!---->
+<!--                              <input type="submit" name="add_posting" class="btn btn-info float-right" value="Add Posting" />-->
+<!--                              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                          </form>-->
+<!--                      </div>-->
+<!---->
+<!--                  </form>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--      </div>-->
 
       <?php
       include ('./has/scripts.php');
