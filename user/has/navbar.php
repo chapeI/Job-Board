@@ -4,9 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fas fa-user"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Employer View</div>
+        <div class="sidebar-brand-text mx-3">User View</div>
     </a>
 
     <!-- Divider -->
@@ -38,24 +38,10 @@
         <div id="collapseJobSeeker1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Job Seeker Header</h6>
-                <a class="collapse-item" href="">My Applications</a>
-                <a class="collapse-item" href="">Interviews</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployer" aria-expanded="true" aria-controls="collapseEmployer">
-            <i class="fas fa-fw fa-suitcase"></i>
-            <span>Employer</span>
-        </a>
-        <div id="collapseEmployer" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Employer Header</h6>
                 <a class="collapse-item" href="">My Settings</a>
-                <a class="collapse-item" href="payments.php">My Payments</a>
-                <a class="collapse-item" href="contact.php">Contact Us</a>
+                <a class="collapse-item" href="">My Payments</a>
+                <a class="collapse-item" href="">My Interviews</a>
+                <a class="collapse-item" href="">Contact Us</a>
             </div>
         </div>
     </li>
@@ -73,14 +59,14 @@
     <li class="nav-item">
         <a class="nav-link" href="applicants.php">
             <i class="fas fa-fw fa-id-card"></i>
-            <span>Applicants</span></a>
+            <span>My Applications</span></a>
     </li>
 
     <!-- Nav Item - Jobs -->
     <li class="nav-item">
         <a class="nav-link" href="postings.php">
             <i class="fas fa-fw fa-sitemap"></i>
-            <span>Postings</span></a>
+            <span>Job Postings</span></a>
     </li>
 
     <!-- Divider -->
