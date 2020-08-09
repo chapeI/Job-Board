@@ -178,10 +178,10 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="../forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="../register.html">Create User Account</a>
+                                    <a class="small" href="register.html">Create User Account</a>
                                 </div>
                             </div>
                         </div>
@@ -208,10 +208,10 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="../forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="../register.html">Create an Employer Account</a>
+                                    <a class="small" href="register.html">Create an Employer Account</a>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +238,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="../forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                             </div>
                         </div>
@@ -262,8 +262,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="../js/sb-admin-2.min.js"></script>
-
-
 
 </body>
 
