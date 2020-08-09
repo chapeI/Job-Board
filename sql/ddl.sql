@@ -145,6 +145,7 @@ CREATE TABLE application (
     posting_id BIGINT,
     application_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     offer_time DATETIME DEFAULT NULL,
+    status VARCHAR(255) DEFAULT 'Under Review',
     PRIMARY KEY (job_seeker_id, application_id),
     FOREIGN KEY (job_seeker_id)
         REFERENCES job_seeker (job_seeker_id)
