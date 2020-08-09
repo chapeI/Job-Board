@@ -24,28 +24,28 @@ INSERT INTO admin (admin_id, email, password)
         (5, 'asnasdell4@flavors.me', 'hiIAyYF');
 
 INSERT INTO users (user_id, email, password)
-    VALUES (1, 'agohier0@booking.com', 'xpnTTJ8'),
-        (2, 'bswaden1@youku.com', 'snzG67SUR'),
-        (3, 'cmathewes2@ibm.com', 'HEvXuBuQl3Z'),
-        (4, 'bforten3@sciencedaily.com', 'VYzYI8jyC'),
-        (5, 'ibeardow4@adobe.com', '7J0upL'),
-        (6, 'ohuntingford5@wufoo.com', 'vIZzqNaWyW'),
-        (7, 'rmckechnie6@zdnet.com', 'iYhnr62Fn'),
-        (8, 'cbutlerbowdon7@google.cn', 'a6tZQabIL'),
-        (9, 'msoaper8@paginegialle.it', 'DDuqpotcX'),
-        (10, 'felijah9@elegantthemes.com', 'nmsgpuUo43b');
+    VALUES (1, 'lego@blocks.com', 'xpnTTJ8'),
+        (2, 'eng@gmail.com', 'snzG67SUR'),
+        (3, 'cu@concordia.ca', 'HEvXuBuQl3Z'),
+        (4, 'babyblue@gmail.com', 'VYzYI8jyC'),
+        (5, 'mpitt@yahoo.com', '7J0upL'),
+        (6, 'jc@gmail.com', 'vIZzqNaWyW'),
+        (7, 'jc@zdnet.com', 'iYhnr62Fn'),
+        (8, 'jc@google.cn', 'a6tZQabIL'),
+        (9, 'pinkmanabq@gmail.com', 'DDuqpotcX'),
+        (10, 'eb@hotmail.com.com', 'nmsgpuUo43b');
 
-INSERT INTO address (user_id, street_number, street_name, city, state, country, postal_code, designation) 
-    VALUES (1, '27527', 'Shoshone', 'Atlanta', 'Georgia', 'United States', '30351', 'work'),
-        (2, '0', 'Waxwing', 'Rockford', 'Illinois', 'United States', '61105', 'home'),
-        (3, '7838', 'Evergreen', 'Phoenix', 'Arizona', 'United States', '85025', 'home'),
-        (4, '9', 'Killdeer', 'Ladysmith', 'British Columbia', 'Canada', NULL, 'home'),
-        (5, '88', 'Towne', 'Seattle', 'Washington', 'United States', '98104', 'work'),
-        (6, '79108', 'Vermont', 'Barrie', 'Ontario', 'Canada', 'L9J', 'home'),
-        (7, '966', 'Steensland', 'Saint-Sauveur', 'Québec', 'Canada', 'J0R', NULL),
-        (8, '01754', 'Hanson', 'Marystown', 'Newfoundland and Labrador', 'Canada', 'L2N', NULL),
-        (9, '1695', 'Lakeland', 'Albuquerque', 'New Mexico', 'United States', '87105', 'work'),
-        (10, '52440', 'Merry', 'Arlington', 'Texas', 'United States', '76011', 'home');
+INSERT INTO address (user_id, street_number, street_name, city, state, country, designation) 
+    VALUES (1, '27527', 'Shoshone', 'Atlanta', 'Georgia', 'United States', 'work'),
+        (2, '0', 'Waxwing', 'Rockford', 'Illinois', 'United States', 'home'),
+        (3, '7838', 'Evergreen', 'Phoenix', 'Arizona', 'United States', 'home'),
+        (4, '9', 'Killdeer', 'Ladysmith', 'British Columbia', 'Canada', 'home'),
+        (5, '88', 'Towne', 'Seattle', 'Washington', 'United States', 'work'),
+        (6, '79108', 'Vermont', 'Barrie', 'Ontario', 'Canada', 'home'),
+        (7, '966', 'Steensland', 'Saint-Sauveur', 'Québec', 'Canada', NULL),
+        (8, '01754', 'Hanson', 'Marystown', 'Newfoundland and Labrador', 'Canada', NULL),
+        (9, '1695', 'Lakeland', 'Albuquerque', 'New Mexico', 'United States', 'work'),
+        (10, '52440', 'Merry', 'Arlington', 'Texas', 'United States', 'home');
 
 INSERT INTO telephone (user_id, phone_number, designation)
     VALUES (1, '5623560622', 'work'),
@@ -82,76 +82,45 @@ INSERT INTO bill (bill_id, user_id, bill_amount)
         (9, 9, 50),
         (10, 10, 50);
 
-INSERT INTO payment (payment_id, user_id, bill_id, payment_amount)
-    VALUES (1, 4, 4, 20),
-        (2, 5, 5, 60.8),
+INSERT INTO payment (payment_id, user_id, method_id, payment_amount)
+    VALUES (1, 4, 1, 20),
+        (2, 5, 1, 60.8),
         (3, 1, 1, 22.08),
-        (4, 8, 8, 5.41),
-        (5, 6, 6, 19.91),
-        (6, 2, 2, 100),
-        (7, 9, 9, 50),
-        (8, 10, 10, 49.99);
+        (4, 8, 1, 5.41),
+        (5, 6, 1, 19.91),
+        (6, 2, 1, 100),
+        (7, 9, 1, 50),
+        (8, 10, 1, 49.99);
 
         
 INSERT INTO employer (employer_id, employer_name, description, employer_tier)
-	VALUES (1, 'Jack', 'construction', '0'),
-    (2, 'Jackson', 'industrial engineer', 1),
-    (3, 'Jill', 'physics teacher', 1),
-    (4, 'John', 'chemistry teacher', '0'),
-    (5, 'Joe', 'receptionist', '0');
-    
-    
-INSERT INTO search(search_id, user_id, input)
-	VALUES(1, 1, 'software developer'),
-    (2, 2, 'construction'),
-    (3, 3, 'physics teacher'),
-    (4, 4, 'chemistry teacher'),
-    (5, 5, 'industrial engineer'),
-    (6, 6, 'receptionist');
-    
-INSERT INTO job_seeker (job_seeker_id, first_name, last_name, description, job_seeker_tier)
-	VALUES (6, 'Jake', 'Chris', 'construction', 0),
-    (7, 'Jax', 'Christian', 'industrial engineer', 0),
-    (8, 'Jay', 'Cris', 'physics teacher', 1),
-    (9, 'Jade', 'Smith', 'chemistry teacher', 1),
-    (10, 'Jeff', 'Doe', 'software developer', 2);
-  
-INSERT INTO employer_search(employer_id, search_id)
-	VALUES (1, 2),
-    (2,5),
-    (5,6);
-    
-INSERT INTO job_seeker_search(job_seeker_id, search_id)
-	VALUES (6,5),
-    (8,3),
-    (9,4);
-    
- INSERT INTO posting(employer_id, posting_id, title, description, number_of_openings)
-	VALUES (1, 1, 'Construction worker', 'Mining', 3),
-    (3, 2, 'Physcis teacher', 'teaching physics sec 5', 1),
-    (5, 3, 'Receptionist', 'Taking appointments and answering calls', 2);
-    
-INSERT INTO posting_search (employer_id, posting_id, search_id)
-	VALUES (1, 1, 2),
-    (3, 2, 3),
-    (5, 3, 6);
-    
- INSERT INTO employer_category (employer_id, category)
-    VALUES (1, 'Tech'),
-    (2, 'Pharmaceutical') ,
-    (3, 'Graphic Design') ,
-    (4, 'Advertisement') ,
-    (5, 'Aerospace'); 
-    
- -- INSERT INTO application(job_seeker_id, application_id, employer_id, posting_id)
-	 #VALUES (6, 1, 1, 1),
-     #(9, 2, 4, 2),
-     #(7, 3, 2, 3);
-    
-    #Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`job_board`.`application`, CONSTRAINT `application_ibfk_2` FOREIGN KEY (`employer_id`, `posting_id`) REFERENCES `posting` (`employer_id`, `posting_id`) ON DELETE CASCADE)
+	VALUES (1, 'Lego', 'Construction', '0'),
+        (2, 'Eng Inc.', 'Industrial Engineering', 1),
+        (3, 'Concordia University', 'Place of higher learning', 1),
+        (4, 'WW Ltd', 'Not meth cooks', '0'),
+        (5, 'Mr. Pitt', 'In need of an exhausted receptionist', '0');
 
+INSERT INTO employer_category (employer_id, category)
+    VALUES (1, 'Toys'),
+        (2, 'Engineering') ,
+        (3, 'Scholastic Pursuits') ,
+        (4, 'Fat Stacks') ,
+        (5, 'Unbearably Obtuse'); 
+   
+INSERT INTO job_seeker (job_seeker_id, first_name, last_name, description, job_seeker_tier)
+	VALUES (6, 'Jake', 'Chris', 'Construction enthusiast', 0),
+        (7, 'Jax', 'Christian', 'Industrial engineer', 0),
+        (8, 'Jay', 'Cris', 'Physics teacher', 1),
+        (9, 'Jesse', 'Pinkman', 'Lab assistant', 1),
+        (10, 'Elaine', 'Benes', 'Fun at parties', 2);
+  
+INSERT INTO posting(employer_id, posting_id, title, description, number_of_openings)
+	VALUES (1, 1, 'Construction Worker', 'Try not to lose any pieces.', 3),
+        (3, 2, 'Physcis teacher', 'Teach physics, develop Grand Unified Theory', 1),
+        (5, 3, 'Receptionist', 'Taking appointments, answering calls', 2);
     
--- INSERT INTO application_search(job_seeker_id, application_id, search_id)
-	-- VALUES (6, 1, 2),
-	-- (9, 2, 4),
-    -- (7, 3, 5);
+    
+INSERT INTO application(job_seeker_id, application_id, employer_id, posting_id)
+	 VALUES (6, 1, 1, 1),
+         (8, 1, 3, 2),
+         (10, 1, 5, 3);
