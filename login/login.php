@@ -90,7 +90,7 @@
           if($count > 0)
           {
               $_SESSION["user_id"] = $_POST['username'];
-              header("location:../user/index.php");
+              header("location:../user/postings.php");
           }
           else
           {

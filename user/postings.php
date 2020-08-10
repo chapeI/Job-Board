@@ -1,15 +1,16 @@
 <?php
 session_start();
+$user_id = $_SESSION['user_id'];
 require('../database.php');
 
 $sql = "SELECT employer_name, posting_time, title, posting.description, posting.posting_id, number_of_openings, employer.employer_id
-                                        FROM employer JOIN posting 
-                                        ON (posting.employer_id=employer.employer_id) ";
+                                        FROM posting
+                                        JOIN employer ON (posting.employer_id=employer.employer_id)
+                                        ";
 $statement = $conn-> prepare($sql);
 $statement->execute();
 $posting = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$user_id = $_SESSION['user_id'];
 $count_of_applications = 0;
 ?>
 
@@ -49,7 +50,6 @@ include ('./has/head.php');
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
 
-            <div>
             <div class="card-body">
               <div class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 <!--                  <input type="submit" name="add_posting" class="btn btn-info float-right" value="Apply to Google" />-->
@@ -61,7 +61,7 @@ include ('./has/head.php');
                           <th class="th-sm">Time Posted</th>
                           <th class="th-sm">Posting ID</th>
                           <th class="th-sm">Description</th>
-                          <th class="th-sm">Number of Openings</th>
+                          <th class="th-sm">~~ employer id</th>
                           <th class="th-sm">Apply</th>
                         </tr>
                       </thead>
@@ -75,19 +75,34 @@ include ('./has/head.php');
                                 <td><?= $post->posting_time ?></td>
                                 <td><?= $post->posting_id ?></td>
                                 <td><?= $post->description ?></td>
-                                <td><?= $post->number_of_openings ?></td>
+                                <td><?= $post->employer_id ?></td>
                                 <td>
-                                    <a href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?>" class="btn btn-primary" style="width: 100%; color: white;">Apply</a>
+                                    <?php
+                                    $posting_id = $post->posting_id;
+                                    $sql = "SELECT *
+                                                FROM application
+                                                WHERE application.job_seeker_id= $user_id AND application.posting_id=$posting_id";
+                                    $statement = $conn-> prepare($sql);
+                                    $statement->execute();
+                                    if($row = $statement->fetch()) {
+                                        $applied = true;
+                                    } else {
+                                        $applied = false;
+                                    }
+                                    ?>
+                                    <a href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?>"
+                                       style="width: 100%" class="btn
+                                       <?php if($applied) {echo 'btn-success';} else {echo 'btn-warning';}  ?>
+                                       ">
+                                        <?php if($applied) {echo 'Applied';} else {echo 'Apply';}  ?>
+                                        </a>
                                 </td>
                             </tr>
                           <?php endforeach; ?>
-                          <?php $_SESSION['app_count'] = count($posting) ?>
-                        <?= $_SESSION['app_count'] ?>
                       </tbody>
                 </table>
               </div>
             </div>
-          </div>
 
         </div>
         <!-- /.container-fluid -->
