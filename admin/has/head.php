@@ -7,7 +7,7 @@
     <meta name="author" content="">
 
     <?php
-    echo '<title>DEBUG Employee View '.$_SESSION['employer_name'].'</title>';
+    echo '<title>DEBUG Employee View '.$_SESSION['username'].'</title>';
     ?>
 
     <!-- Custom fonts for this template-->

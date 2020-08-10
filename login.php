@@ -27,7 +27,6 @@ session_start();
                         if($count > 0)
                             {
                                  $_SESSION["username"] = $username;
-                                 header("location:login_success.php");
                             }
                         else
                             {
