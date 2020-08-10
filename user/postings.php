@@ -99,13 +99,11 @@ include ('./has/head.php');
                                         $applied = false;
                                     }
                                     ?>
-                                    <button href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?> 
-                                    <?= (($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? 'disabled' : '')"
-                                       style="width: 100%" class="btn
-                                       <?php if($applied) {echo 'btn-success';} else {echo 'btn-warning';}  ?>
-                                       ">
+                                    <button onclick="window.location.href='apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?>'" 
+                                        <?= (($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? 'disabled' : '') ?>
+                                        style="width: 100%" class="btn <?php if($applied) {echo 'btn-success';} else {echo 'btn-warning';}  ?>">
                                         <?php if($applied) {echo 'Applied';} else {echo 'Apply';}  ?>
-                                        </button>
+                                    </button>
                                 </td>
                             </tr>
                           <?php endforeach; ?>
