@@ -11,7 +11,17 @@ $statement = $conn-> prepare($sql);
 $statement->execute();
 $posting = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$count_of_applications = 0;
+
+$user_id = $_SESSION['user_id'];
+$tier_query = $conn->prepare("SELECT job_seeker_tier FROM job_seeker WHERE job_seeker_id = " . $user_id);
+$tier_query->execute();
+$row = $tier_query->fetch();
+$tier = $row[0];
+$num_applications_query = $conn->prepare("SELECT COUNT(application_id) FROM application WHERE job_seeker_id = " . $user_id);
+$num_applications_query->execute();
+$row = $num_applications_query->fetch();
+$num_applications = $row[0];
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +56,6 @@ include ('./has/head.php');
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Postings</h1>
           <p class="mb-4">See all job postings</p>
-
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
 
@@ -90,12 +99,13 @@ include ('./has/head.php');
                                         $applied = false;
                                     }
                                     ?>
-                                    <a href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?>"
+                                    <button href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?> 
+                                    <?= (($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? 'disabled' : '')"
                                        style="width: 100%" class="btn
                                        <?php if($applied) {echo 'btn-success';} else {echo 'btn-warning';}  ?>
                                        ">
                                         <?php if($applied) {echo 'Applied';} else {echo 'Apply';}  ?>
-                                        </a>
+                                        </button>
                                 </td>
                             </tr>
                           <?php endforeach; ?>

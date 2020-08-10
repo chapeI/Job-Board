@@ -100,6 +100,7 @@
               $_SESSION["last_name"] = $row['last_name'];
 //              $_SESSION["user_name"] = $statement
               header("location:../user/postings.php");
+
           }
           else
           {
