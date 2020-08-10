@@ -23,9 +23,6 @@
             {
                  $_SESSION["username"] = $username;
                  header("location:login_success.php");
-                 $statement = $conn->prepare("SELECT job_seeker_tier FROM job_seeker WHERE job_seeker_id = {$username}");
-                 $row = $statement->execute();
-                 $_SESSION["tier"] = $row["job_seeker_tier"];
             }
         else
             {
@@ -68,9 +65,6 @@
               $_SESSION['debug'] = 'debugging';
     //                              $_SESSION['employer_name'] = 'Google';
               header('location:../employer/index.php');
-             $statement = $conn->prepare("SELECT employer_tier FROM employer WHERE employer_id = {$username}");
-             $row = $statement->execute();
-             $_SESSION["tier"] = $row["employer_tier"];
           }
           else
           {
@@ -96,8 +90,7 @@
           if($count > 0)
           {
               $_SESSION["user_id"] = $_POST['username'];
-              header("location:../user/index.php");
-              $user_type_query = 'SELECT 
+             header("location:../user/index.php");
           }
           else
           {
