@@ -52,10 +52,7 @@ include ('./has/head.php');
                          Dashboard</h1>
                 </div>
 
-                <!-- Content Row -->
-                <?php
-                include ('./dashboard.php');
-                ?>
+
 
 
         </div>
