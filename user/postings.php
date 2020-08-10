@@ -11,6 +11,14 @@ $statement->execute();
 $posting = $statement->fetchAll(PDO::FETCH_OBJ);
 
 $user_id = $_SESSION['user_id'];
+$tier_query = $conn->prepare("SELECT job_seeker_tier FROM job_seeker WHERE job_seeker_id = " . $user_id);
+$tier_query->execute();
+$row = $tier_query->fetch();
+$tier = $row[0];
+$num_applications_query = $conn->prepare("SELECT COUNT(application_id) FROM application WHERE job_seeker_id = " . $user_id);
+$num_applications_query->execute();
+$row = $num_applications_query->fetch();
+$num_applications = $row[0];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +53,6 @@ include ('./has/head.php');
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Postings</h1>
           <p class="mb-4">See all job postings</p>
-
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
 
@@ -75,7 +82,8 @@ include ('./has/head.php');
                                 <td><?= $post->description ?></td>
                                 <td><?= $post->number_of_openings ?></td>
                                 <td>
-                                    <a href="apply.php?posting_id=<?= $post->title?>" class="btn btn-info" style="width: 100%; color: white;">Apply</a>
+                                <a href="apply.php?posting_id=<?= $post->title?>" class="btn btn-info" style="width: 100%; color: white;" 
+                                    onclick=<?= ($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? '"return false;"' : '' ?>>Apply</a>
                                 </td>
                             </tr>
                           <?php endforeach; ?>
