@@ -83,9 +83,9 @@ include ('./has/head.php');
                                 <td><?= $post->description ?></td>
                                 <td><?= $post->number_of_openings ?></td>
                                 <td>
-                                <a href="apply.php?posting_id=<?= $post->title?>" class="btn btn-info" style="width: 100%; color: white;" 
-                                    onclick=<?= ($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? '"return false;"' : '' ?>>Apply</a>
-                                </td>
+                                <button onclick="window.location.href='apply.php?posting_id=<?= $post->title?>'" class="btn btn-info" style="width: 100%; color: white;" 
+                                    <?= (($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? 'disabled' : '') ?>>Apply</a>
+                                </button>
                             </tr>
                           <?php endforeach; ?>
                           <?php $_SESSION['app_count'] = count($posting) ?>
