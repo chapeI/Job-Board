@@ -333,7 +333,7 @@ SELECT *
 FROM payment_method;
 
 UPDATE payment_method
-SET account_number = 'super-secret-swill-bank-account', is_automatic = FALSE
+SET account_number = 'super-secret-swiss-bank-account', is_automatic = FALSE
 WHERE user_id = 11
     AND method_id = 1;
 
