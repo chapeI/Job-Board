@@ -49,7 +49,7 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
 
                                <?php
-                               echo '<div>Welcome '.$_SESSION['user_id'].'</div>';
+                               echo '<div>Welcome '.$_SESSION['user_name'].' '.$_SESSION['last_name'].'</div>';
                                ?>
                             </span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">

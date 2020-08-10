@@ -78,7 +78,10 @@
       {
           $username = $_POST['username'];
           $password = $_POST['password'];
-          $query = "SELECT * FROM users WHERE user_id= '$username' AND password = '$password'";
+          $query = "SELECT * 
+                    FROM users
+                    JOIN job_seeker ON (job_seeker_id=user_id)
+                    WHERE user_id= '$username' AND password = '$password'";
           $statement = $conn->prepare($query);
           $statement->execute(
               array(
@@ -86,10 +89,16 @@
                   'password' => $password
               )
           );
+
+          $row = $statement->fetch();
+
           $count = $statement->rowCount();
           if($count > 0)
           {
               $_SESSION["user_id"] = $_POST['username'];
+              $_SESSION["user_name"] = $row['first_name'];
+              $_SESSION["last_name"] = $row['last_name'];
+//              $_SESSION["user_name"] = $statement
               header("location:../user/postings.php");
           }
           else
