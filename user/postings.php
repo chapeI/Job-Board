@@ -2,8 +2,7 @@
 session_start();
 require('../database.php');
 
-$sql = "SELECT employer_name, posting_time, title, posting.description, posting_id
-                                        number_of_openings 
+$sql = "SELECT employer_name, posting_time, title, posting.description, posting.posting_id, number_of_openings, employer.employer_id
                                         FROM employer JOIN posting 
                                         ON (posting.employer_id=employer.employer_id) ";
 $statement = $conn-> prepare($sql);
@@ -11,6 +10,7 @@ $statement->execute();
 $posting = $statement->fetchAll(PDO::FETCH_OBJ);
 
 $user_id = $_SESSION['user_id'];
+$count_of_applications = 0;
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +59,7 @@ include ('./has/head.php');
                           <th class="th-sm">Title</th>
                           <th class="th-sm">Employer</th>
                           <th class="th-sm">Time Posted</th>
+                          <th class="th-sm">Posting ID</th>
                           <th class="th-sm">Description</th>
                           <th class="th-sm">Number of Openings</th>
                           <th class="th-sm">Apply</th>
@@ -72,13 +73,16 @@ include ('./has/head.php');
                                 <td><?= $post->title ?></td>
                                 <td><?= $post->employer_name ?></td>
                                 <td><?= $post->posting_time ?></td>
+                                <td><?= $post->posting_id ?></td>
                                 <td><?= $post->description ?></td>
                                 <td><?= $post->number_of_openings ?></td>
                                 <td>
-                                    <a href="apply.php?posting_id=<?= $post->title?>" class="btn btn-info" style="width: 100%; color: white;">Apply</a>
+                                    <a href="apply.php?posting_id=<?= $post->posting_id?>&employer_id=<?= $post->employer_id?>" class="btn btn-primary" style="width: 100%; color: white;">Apply</a>
                                 </td>
                             </tr>
                           <?php endforeach; ?>
+                          <?php $_SESSION['app_count'] = count($posting) ?>
+                        <?= $_SESSION['app_count'] ?>
                       </tbody>
                 </table>
               </div>
