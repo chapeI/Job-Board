@@ -7,4 +7,4 @@ Clone this repository
 git clone git@github.com:21chapel/Job-Board.git
 ```
 
-Start Apache and MySql and navigate to (localhost/admin/login.php).
+Start Apache and MySql and navigate to [localhost/admin/login.php].
