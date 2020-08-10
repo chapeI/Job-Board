@@ -1,20 +1,7 @@
 <?php
     session_start();
-    $servername = "iyc353.encs.concordia.ca";
-    $username = "iyc353_1";
-    $password = "folklore";
-    $dbname = "iyc353_1";
 
-    try {
-    $conn = new PDO("mysql:host=$servername; dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-//    $stmt = $conn->prepare('INSERT INTO posting (employer_id, posting_id, title, description) VALUES (?, ?, ?, ?)');
-//    $stmt->execute([
-//        2, 8, 'IT ', 'plug in more wires'
-//    ]);
+    require('../database.php');
 
     if(isset($_POST["login"]))
     {
@@ -102,7 +89,7 @@
           $count = $statement->rowCount();
           if($count > 0)
           {
-              $_SESSION["username"] = $username;
+              $_SESSION["user_id"] = $_POST['username'];
               header("location:../user/index.php");
           }
           else
@@ -110,10 +97,6 @@
               echo '<p>Wrong user password or email</p>';
           }
       }
-
-    } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-    }
 
 ?>
 

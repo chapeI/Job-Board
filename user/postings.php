@@ -1,30 +1,16 @@
 <?php
 session_start();
-$servername = "iyc353.encs.concordia.ca";
-$username = "iyc353_1";
-$password = "folklore";
-$dbname = "iyc353_1";
+require('../database.php');
 
-try {
-    $conn = new PDO("mysql:host=$servername; dbname=$dbname", $username, $password);
-// set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sql = "SELECT employer_name, posting_time, title, posting.description, posting_id
+                                        number_of_openings 
+                                        FROM employer JOIN posting 
+                                        ON (posting.employer_id=employer.employer_id) ";
+$statement = $conn-> prepare($sql);
+$statement->execute();
+$posting = $statement->fetchAll(PDO::FETCH_OBJ);
 
-    if(isset($_POST['add_posting']))
-    {
-        $employer_id = $_POST['employer_id'];
-        $posting_id = $_POST['posting_id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-
-        $stmt = $conn->prepare('INSERT INTO posting (employer_id, posting_id, title, description) VALUES (?, ?, ?, ?)');
-        $stmt->execute([
-            $employer_id, $posting_id, $title, $description
-        ]);
-    }
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -65,45 +51,35 @@ include ('./has/head.php');
 
             <div>
             <div class="card-body">
-              <div class="table-responsive">
-                  <input type="submit" name="add_posting" class="btn btn-info float-right" value="Apply to Google" />
+              <div class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<!--                  <input type="submit" name="add_posting" class="btn btn-info float-right" value="Apply to Google" />-->
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Employer</th>
-                      <th>Time Posted</th>
-                      <th>Title</th>
-                      <th>Description</th>
-                      <th>Number of Openings</th>
-                      <th>Apply</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                      <thead>
+                        <tr>
+                          <th class="th-sm">Title</th>
+                          <th class="th-sm">Employer</th>
+                          <th class="th-sm">Time Posted</th>
+                          <th class="th-sm">Description</th>
+                          <th class="th-sm">Number of Openings</th>
+                          <th class="th-sm">Apply</th>
+                        </tr>
+                      </thead>
 
-                    <?php
-                        $servername = "iyc353.encs.concordia.ca"; // Change this to iyc353.encs.concordia.ca if you have trouble connecting
-                        $username = "iyc353_1";
-                        $password = "folklore";
-                        try {
-                            $conn = new PDO("mysql:host=$servername;dbname=iyc353_1", $username, $password);
-                            // set the PDO error mode to exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        } catch(PDOException $e) {
-                            echo "Connection failed: " . $e->getMessage();
-                        }
-                    $query_string = "SELECT employer_name, posting_time, title, posting.description, 
-                                    number_of_openings 
-                                    FROM employer JOIN posting 
-                                    ON (posting.employer_id=employer.employer_id) ";
-                        $query = $conn-> prepare($query_string);
-                        $query->execute();
-                        while($row = $query-> fetch()) {
-                            echo "<tr><td>". $row["employer_name"]. "</td><td>". $row["posting_time"]. "</td><td>". $row["title"].
-                                "</td><td>". $row["description"]. "</td><td>". $row["number_of_openings"]. "</td><td>
-                                    <button style=\"width: 100px; height: 50px\" class='btn btn-primary'>Apply</button></td></tr>";
-                        }
-                    ?>
-                  </tbody>
+                      <tbody>
+
+                          <?php foreach($posting as $post): ?>
+                            <tr>
+                                <td><?= $post->title ?></td>
+                                <td><?= $post->employer_name ?></td>
+                                <td><?= $post->posting_time ?></td>
+                                <td><?= $post->description ?></td>
+                                <td><?= $post->number_of_openings ?></td>
+                                <td>
+                                    <a href="apply.php?posting_id=<?= $post->title?>" class="btn btn-info" style="width: 100%; color: white;">Apply</a>
+                                </td>
+                            </tr>
+                          <?php endforeach; ?>
+                      </tbody>
                 </table>
               </div>
             </div>
@@ -135,6 +111,13 @@ include ('./has/head.php');
       <?php
       include ('./has/scripts.php');
       ?>
+
+      <script>
+          $(document).ready(function () {
+              $('#dtBasicExample').DataTable();
+              $('.dataTables_length').addClass('bs-select');
+          });
+      </script>
 
 </body>
 

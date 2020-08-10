@@ -7,7 +7,7 @@
     <meta name="author" content="">
 
     <?php
-    echo '<title>DEBUG Employee View '.$_SESSION['username'].'</title>';
+    echo '<title>DEBUG Employee View '.$_SESSION['user_id'].'</title>';
     ?>
 
     <!-- Custom fonts for this template-->
@@ -16,5 +16,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
 
 </head>
