@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $servername = "iyc353.encs.concordia.ca";
+    $servername = "127.0.0.1";
     $username = "iyc353_1";
     $password = "folklore";
     $dbname = "iyc353_1";
@@ -36,6 +36,9 @@
             {
                  $_SESSION["username"] = $username;
                  header("location:login_success.php");
+                 $statement = $conn->prepare("SELECT job_seeker_tier FROM job_seeker WHERE job_seeker_id = {$username}");
+                 $row = $statement->execute();
+                 $_SESSION["tier"] = $row["job_seeker_tier"];
             }
         else
             {
@@ -78,6 +81,9 @@
               $_SESSION['debug'] = 'debugging';
     //                              $_SESSION['employer_name'] = 'Google';
               header('location:../employer/index.php');
+             $statement = $conn->prepare("SELECT employer_tier FROM employer WHERE employer_id = {$username}");
+             $row = $statement->execute();
+             $_SESSION["tier"] = $row["employer_tier"];
           }
           else
           {
@@ -104,6 +110,7 @@
           {
               $_SESSION["username"] = $username;
               header("location:../user/index.php");
+              $user_type_query = 'SELECT 
           }
           else
           {
