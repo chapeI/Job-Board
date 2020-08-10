@@ -1,0 +1,833 @@
+-- users and employer before adding a new employer
+
++---------+----------------------+-------------+-------------+
+| user_id | email                | password    | frozen_time |
++---------+----------------------+-------------+-------------+
+|       1 | lego@blocks.com      | xpnTTJ8     | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR   | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC   | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL      | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW  | NULL        |
+|       7 | jc@zdnet.com         | iYhnr62Fn   | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL   | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX   | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b | NULL        |
++---------+----------------------+-------------+-------------+
+10 rows in set (0.00 sec)
+
++-------------+----------------------+--------------------------------------+---------------+
+| employer_id | employer_name        | description                          | employer_tier |
++-------------+----------------------+--------------------------------------+---------------+
+|           1 | Lego                 | Construction                         |             0 |
+|           2 | Eng Inc.             | Industrial Engineering               |             1 |
+|           3 | Concordia University | Place of higher learning             |             1 |
+|           4 | WW Ltd               | Not meth cooks                       |             0 |
+|           5 | Mr. Pitt             | In need of an exhausted receptionist |             0 |
++-------------+----------------------+--------------------------------------+---------------+
+5 rows in set (0.00 sec)
+
+-- add user with email = 'not.evil@gmail.cm' and password = 'SoNotEvil'
+
+Query OK, 1 row affected (0.00 sec)
+
+-- add employer with id = 11, employer_name = Google, and employer_tier = 1
+
+Query OK, 1 row affected (0.01 sec)
+
++---------+----------------------+-------------+-------------+
+| user_id | email                | password    | frozen_time |
++---------+----------------------+-------------+-------------+
+|       1 | lego@blocks.com      | xpnTTJ8     | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR   | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC   | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL      | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW  | NULL        |
+|       7 | jc@zdnet.com         | iYhnr62Fn   | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL   | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX   | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b | NULL        |
+|      11 | not.evil@gmail.com   | SoNotEvil93 | NULL        |
++---------+----------------------+-------------+-------------+
+11 rows in set (0.00 sec)
+
++-------------+----------------------+--------------------------------------+---------------+
+| employer_id | employer_name        | description                          | employer_tier |
++-------------+----------------------+--------------------------------------+---------------+
+|           1 | Lego                 | Construction                         |             0 |
+|           2 | Eng Inc.             | Industrial Engineering               |             1 |
+|           3 | Concordia University | Place of higher learning             |             1 |
+|           4 | WW Ltd               | Not meth cooks                       |             0 |
+|           5 | Mr. Pitt             | In need of an exhausted receptionist |             0 |
+|          11 | Google               | NULL                                 |             1 |
++-------------+----------------------+--------------------------------------+---------------+
+6 rows in set (0.00 sec)
+
+-- edit employer description where employer_id = 11
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+-- delete user where user_id = 1
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------+----------------------+-------------+-------------+
+| user_id | email                | password    | frozen_time |
++---------+----------------------+-------------+-------------+
+|      -1 | lego@blocks.com      | xpnTTJ8     | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR   | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC   | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL      | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW  | NULL        |
+|       7 | jc@zdnet.com         | iYhnr62Fn   | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL   | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX   | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b | NULL        |
+|      11 | not.evil@gmail.com   | SoNotEvil93 | NULL        |
++---------+----------------------+-------------+-------------+
+11 rows in set (0.00 sec)
+
++-------------+----------------------+--------------------------------------+---------------+
+| employer_id | employer_name        | description                          | employer_tier |
++-------------+----------------------+--------------------------------------+---------------+
+|          -1 | Lego                 | Construction                         |             0 |
+|           2 | Eng Inc.             | Industrial Engineering               |             1 |
+|           3 | Concordia University | Place of higher learning             |             1 |
+|           4 | WW Ltd               | Not meth cooks                       |             0 |
+|           5 | Mr. Pitt             | In need of an exhausted receptionist |             0 |
+|          11 | Google               | A very not evil compnay.             |             1 |
++-------------+----------------------+--------------------------------------+---------------+
+6 rows in set (0.00 sec)
+
+-- adress and telephone before adding new entries
+
++---------+---------------+-------------+---------------+---------------------------+---------------+-------------+-------------+
+| user_id | street_number | street_name | city          | state                     | country       | postal_code | designation |
++---------+---------------+-------------+---------------+---------------------------+---------------+-------------+-------------+
+|      -1 |         27527 | Shoshone    | Atlanta       | Georgia                   | United States | 30351       | work        |
+|       2 |             0 | Waxwing     | Rockford      | Illinois                  | United States | 61105       | home        |
+|       3 |          7838 | Evergreen   | Phoenix       | Arizona                   | United States | 85025       | home        |
+|       4 |             9 | Killdeer    | Ladysmith     | British Columbia          | Canada        | NULL        | home        |
+|       5 |            88 | Towne       | Seattle       | Washington                | United States | 98104       | work        |
+|       6 |         79108 | Vermont     | Barrie        | Ontario                   | Canada        | L9J         | home        |
+|       7 |           966 | Steensland  | Saint-Sauveur | Québec                    | Canada        | J0R         | NULL        |
+|       8 |          1754 | Hanson      | Marystown     | Newfoundland and Labrador | Canada        | L2N         | NULL        |
+|       9 |          1695 | Lakeland    | Albuquerque   | New Mexico                | United States | 87105       | work        |
+|      10 |         52440 | Merry       | Arlington     | Texas                     | United States | 76011       | home        |
++---------+---------------+-------------+---------------+---------------------------+---------------+-------------+-------------+
+10 rows in set (0.00 sec)
+
++---------+--------------+-------------+
+| user_id | phone_number | designation |
++---------+--------------+-------------+
+|      -1 | 5623560622   | work        |
+|       2 | 4473604365   | home        |
+|       3 | 3695527831   | mobile      |
+|       4 | 4344699876   | home        |
+|       5 | 5369351277   | work        |
+|       6 | 5087655329   | mobile      |
+|       7 | 4374569631   | work        |
+|       8 | 2618996475   | home        |
+|       9 | 3605600615   | mobile      |
+|      10 | 6072920866   | work        |
++---------+--------------+-------------+
+10 rows in set (0.00 sec)
+
+-- add address for new employer
+
+Query OK, 1 row affected (0.00 sec)
+
+-- add telephone number for new employer
+
+Query OK, 1 row affected (0.00 sec)
+
++---------+---------------+--------------------------------+----------------+---------------------------+---------------+-------------+---------------+
+| user_id | street_number | street_name                    | city           | state                     | country       | postal_code | designation   |
++---------+---------------+--------------------------------+----------------+---------------------------+---------------+-------------+---------------+
+|      -1 |         27527 | Shoshone                       | Atlanta        | Georgia                   | United States | 30351       | work          |
+|       2 |             0 | Waxwing                        | Rockford       | Illinois                  | United States | 61105       | home          |
+|       3 |          7838 | Evergreen                      | Phoenix        | Arizona                   | United States | 85025       | home          |
+|       4 |             9 | Killdeer                       | Ladysmith      | British Columbia          | Canada        | NULL        | home          |
+|       5 |            88 | Towne                          | Seattle        | Washington                | United States | 98104       | work          |
+|       6 |         79108 | Vermont                        | Barrie         | Ontario                   | Canada        | L9J         | home          |
+|       7 |           966 | Steensland                     | Saint-Sauveur  | Québec                    | Canada        | J0R         | NULL          |
+|       8 |          1754 | Hanson                         | Marystown      | Newfoundland and Labrador | Canada        | L2N         | NULL          |
+|       9 |          1695 | Lakeland                       | Albuquerque    | New Mexico                | United States | 87105       | work          |
+|      10 |         52440 | Merry                          | Arlington      | Texas                     | United States | 76011       | home          |
+|      11 |          5555 | Paved with Good Intentions Rd. | Silicon Valley | CA                        | United States | 12345       | not evil lair |
++---------+---------------+--------------------------------+----------------+---------------------------+---------------+-------------+---------------+
+11 rows in set (0.00 sec)
+
++---------+----------------+---------------+
+| user_id | phone_number   | designation   |
++---------+----------------+---------------+
+|      -1 | 5623560622     | work          |
+|       2 | 4473604365     | home          |
+|       3 | 3695527831     | mobile        |
+|       4 | 4344699876     | home          |
+|       5 | 5369351277     | work          |
+|       6 | 5087655329     | mobile        |
+|       7 | 4374569631     | work          |
+|       8 | 2618996475     | home          |
+|       9 | 3605600615     | mobile        |
+|      10 | 6072920866     | work          |
+|      11 | 1-800-NOT-EVIL | not evil lair |
++---------+----------------+---------------+
+11 rows in set (0.01 sec)
+
+-- employer_category before adding new entry
+
++-------------+---------------------+
+| employer_id | category            |
++-------------+---------------------+
+|          -1 | Toys                |
+|           2 | Engineering         |
+|           3 | Scholastic Pursuits |
+|           4 | Fat Stacks          |
+|           5 | Unbearably Obtuse   |
++-------------+---------------------+
+5 rows in set (0.00 sec)
+
+-- add two new categories for new employer
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
++-------------+-----------------------------+
+| employer_id | category                    |
++-------------+-----------------------------+
+|          -1 | Toys                        |
+|           2 | Engineering                 |
+|           3 | Scholastic Pursuits         |
+|           4 | Fat Stacks                  |
+|           5 | Unbearably Obtuse           |
+|          11 | Benevolant World Domination |
+|          11 | Evil Deeds                  |
++-------------+-----------------------------+
+7 rows in set (0.00 sec)
+
+-- delete a category
+
+Query OK, 1 row affected (0.00 sec)
+
++-------------+-----------------------------+
+| employer_id | category                    |
++-------------+-----------------------------+
+|          -1 | Toys                        |
+|           2 | Engineering                 |
+|           3 | Scholastic Pursuits         |
+|           4 | Fat Stacks                  |
+|           5 | Unbearably Obtuse           |
+|          11 | Benevolant World Domination |
++-------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+-- edit a category
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++-------------+---------------------------------+
+| employer_id | category                        |
++-------------+---------------------------------+
+|          -1 | Toys                            |
+|           2 | Engineering                     |
+|           3 | Scholastic Pursuits             |
+|           4 | Fat Stacks                      |
+|           5 | Unbearably Obtuse               |
+|          11 | Making the World a Safer Search |
++-------------+---------------------------------+
+6 rows in set (0.00 sec)
+
+-- posting before adding a new job
+
++-------------+------------+---------------------+------------+---------------------+---------------------------------------------+--------------------+
+| employer_id | posting_id | posting_time        | close_time | title               | description                                 | number_of_openings |
++-------------+------------+---------------------+------------+---------------------+---------------------------------------------+--------------------+
+|          -1 |          1 | 2020-08-09 17:25:30 | NULL       | Construction Worker | Try not to lose any pieces.                 |                  3 |
+|           3 |          2 | 2020-08-09 17:25:30 | NULL       | Physcis teacher     | Teach physics, develop Grand Unified Theory |                  1 |
+|           5 |          3 | 2020-08-09 17:25:30 | NULL       | Receptionist        | Taking appointments, answering calls        |                  2 |
++-------------+------------+---------------------+------------+---------------------+---------------------------------------------+--------------------+
+3 rows in set (0.00 sec)
+
+-- add a new job posting
+
+Query OK, 1 row affected (0.00 sec)
+
++-------------+------------+---------------------+------------+----------------------+---------------------------------------------+--------------------+
+| employer_id | posting_id | posting_time        | close_time | title                | description                                 | number_of_openings |
++-------------+------------+---------------------+------------+----------------------+---------------------------------------------+--------------------+
+|          -1 |          1 | 2020-08-09 17:25:30 | NULL       | Construction Worker  | Try not to lose any pieces.                 |                  3 |
+|           3 |          2 | 2020-08-09 17:25:30 | NULL       | Physcis teacher      | Teach physics, develop Grand Unified Theory |                  1 |
+|           5 |          3 | 2020-08-09 17:25:30 | NULL       | Receptionist         | Taking appointments, answering calls        |                  2 |
+|          11 |          1 | 2020-08-09 17:26:00 | NULL       | Not an Evil Position | Seriously guys, we are not evil.            |               1001 |
++-------------+------------+---------------------+------------+----------------------+---------------------------------------------+--------------------+
+4 rows in set (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+-- applications before any job offers
+
++---------------+----------------+-------------+------------+---------------------+------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time |
++---------------+----------------+-------------+------------+---------------------+------------+
+|             6 |              1 |          -1 |          1 | 2020-08-09 17:25:30 | NULL       |
+|             6 |              2 |          11 |          1 | 2020-08-09 17:26:00 | NULL       |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL       |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL       |
++---------------+----------------+-------------+------------+---------------------+------------+
+4 rows in set (0.00 sec)
+
+-- offer a job to an applicant
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------------+----------------+-------------+------------+---------------------+---------------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time          |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+|             6 |              1 |          -1 |          1 | 2020-08-09 17:25:30 | NULL                |
+|             6 |              2 |          11 |          1 | 2020-08-09 17:26:00 | 2020-08-09 17:26:00 |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL                |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL                |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+4 rows in set (0.00 sec)
+
+-- report of a job posting where employer_id = 11 and posting_id = 1
+
++----------------------+----------------------------------+---------------------+
+| title                | description                      | posting_time        |
++----------------------+----------------------------------+---------------------+
+| Not an Evil Position | Seriously guys, we are not evil. | 2020-08-09 17:26:00 |
++----------------------+----------------------------------+---------------------+
+1 row in set (0.00 sec)
+
+-- report of applicants for a job posting where employer_id = 11 and posting_id = 1
+
++------------+-----------+---------------------+---------------------+------------+
+| first_name | last_name | application_time    | offer_time          | close_time |
++------------+-----------+---------------------+---------------------+------------+
+| Jake       | Chris     | 2020-08-09 17:26:00 | 2020-08-09 17:26:00 | NULL       |
++------------+-----------+---------------------+---------------------+------------+
+1 row in set (0.00 sec)
+
+-- report of all job postings made by an employer where employer_id = 11 within time interval 1000-01-01 and 9999-12-31
+
++----------------------+----------------------------------+---------------------+--------------------+----------------------+---------------------------+
+| title                | description                      | posting_time        | number_of_openings | number_of_applicants | number_of_accepted_offers |
++----------------------+----------------------------------+---------------------+--------------------+----------------------+---------------------------+
+| Not an Evil Position | Seriously guys, we are not evil. | 2020-08-09 17:26:00 |               1001 |                    1 |                         0 |
++----------------------+----------------------------------+---------------------+--------------------+----------------------+---------------------------+
+1 row in set (0.00 sec)
+
+-- users and job_seeker before adding a new employee
+
++---------+----------------------+-------------+-------------+
+| user_id | email                | password    | frozen_time |
++---------+----------------------+-------------+-------------+
+|      -1 | lego@blocks.com      | xpnTTJ8     | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR   | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC   | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL      | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW  | NULL        |
+|       7 | jc@zdnet.com         | iYhnr62Fn   | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL   | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX   | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b | NULL        |
+|      11 | not.evil@gmail.com   | SoNotEvil93 | NULL        |
++---------+----------------------+-------------+-------------+
+11 rows in set (0.00 sec)
+
++---------------+------------+-----------+-------------------------+-----------------+
+| job_seeker_id | first_name | last_name | description             | job_seeker_tier |
++---------------+------------+-----------+-------------------------+-----------------+
+|             6 | Jake       | Chris     | Construction enthusiast |               0 |
+|             7 | Jax        | Christian | Industrial engineer     |               0 |
+|             8 | Jay        | Cris      | Physics teacher         |               1 |
+|             9 | Jesse      | Pinkman   | Lab assistant           |               1 |
+|            10 | Elaine     | Benes     | Fun at parties          |               2 |
++---------------+------------+-----------+-------------------------+-----------------+
+5 rows in set (0.00 sec)
+
+-- add new user with email = jbunter@hotmail.com and password = WeakPassword
+
+Query OK, 1 row affected (0.00 sec)
+
+-- add new employee with first_name = 'Joe', last_name = 'Bunter', and job_seeker_tier = 2
+
+Query OK, 1 row affected (0.01 sec)
+
++---------+----------------------+--------------+-------------+
+| user_id | email                | password     | frozen_time |
++---------+----------------------+--------------+-------------+
+|      -1 | lego@blocks.com      | xpnTTJ8      | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR    | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z  | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC    | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL       | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW   | NULL        |
+|       7 | jc@zdnet.com         | iYhnr62Fn    | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL    | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX    | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b  | NULL        |
+|      11 | not.evil@gmail.com   | SoNotEvil93  | NULL        |
+|      12 | jbunter@hotmail.com  | WeakPassword | NULL        |
++---------+----------------------+--------------+-------------+
+12 rows in set (0.00 sec)
+
++---------------+------------+-----------+-------------------------+-----------------+
+| job_seeker_id | first_name | last_name | description             | job_seeker_tier |
++---------------+------------+-----------+-------------------------+-----------------+
+|             6 | Jake       | Chris     | Construction enthusiast |               0 |
+|             7 | Jax        | Christian | Industrial engineer     |               0 |
+|             8 | Jay        | Cris      | Physics teacher         |               1 |
+|             9 | Jesse      | Pinkman   | Lab assistant           |               1 |
+|            10 | Elaine     | Benes     | Fun at parties          |               2 |
+|            12 | Joe        | Bunter    | NULL                    |               2 |
++---------------+------------+-----------+-------------------------+-----------------+
+6 rows in set (0.00 sec)
+
+-- delete user where user_id = 7
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------+----------------------+--------------+-------------+
+| user_id | email                | password     | frozen_time |
++---------+----------------------+--------------+-------------+
+|      -7 | jc@zdnet.com         | iYhnr62Fn    | NULL        |
+|      -1 | lego@blocks.com      | xpnTTJ8      | NULL        |
+|       2 | eng@gmail.com        | snzG67SUR    | NULL        |
+|       3 | cu@concordia.ca      | HEvXuBuQl3Z  | NULL        |
+|       4 | babyblue@gmail.com   | VYzYI8jyC    | NULL        |
+|       5 | mpitt@yahoo.com      | 7J0upL       | NULL        |
+|       6 | jc@gmail.com         | vIZzqNaWyW   | NULL        |
+|       8 | jc@google.cn         | a6tZQabIL    | NULL        |
+|       9 | pinkmanabq@gmail.com | DDuqpotcX    | NULL        |
+|      10 | eb@hotmail.com.com   | nmsgpuUo43b  | NULL        |
+|      11 | not.evil@gmail.com   | SoNotEvil93  | NULL        |
+|      12 | jbunter@hotmail.com  | WeakPassword | NULL        |
++---------+----------------------+--------------+-------------+
+12 rows in set (0.00 sec)
+
+-- edit employee description where job_seeker_id = 12
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+| job_seeker_id | first_name | last_name | description                                                 | job_seeker_tier |
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+|            -7 | Jax        | Christian | Industrial engineer                                         |               0 |
+|             6 | Jake       | Chris     | Construction enthusiast                                     |               0 |
+|             8 | Jay        | Cris      | Physics teacher                                             |               1 |
+|             9 | Jesse      | Pinkman   | Lab assistant                                               |               1 |
+|            10 | Elaine     | Benes     | Fun at parties                                              |               2 |
+|            12 | Joe        | Bunter    | Goon for hire: seeking a non-evil entity to do bidding for. |               2 |
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+6 rows in set (0.00 sec)
+
+-- add address and telephone number for new emploee
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+-- display employee information
+
++------------+-----------+-------------------------------------------------------------+---------------------+
+| first_name | last_name | description                                                 | email               |
++------------+-----------+-------------------------------------------------------------+---------------------+
+| Joe        | Bunter    | Goon for hire: seeking a non-evil entity to do bidding for. | jbunter@hotmail.com |
++------------+-----------+-------------------------------------------------------------+---------------------+
+1 row in set (0.00 sec)
+
++---------------+-------------------+-------------+---------+--------------------------+-------------+-------------+
+| street_number | street_name       | city        | state   | country                  | postal_code | designation |
++---------------+-------------------+-------------+---------+--------------------------+-------------+-------------+
+|            42 | Evergreen Terrace | Springfield | Unknown | United States...probably | 55555       | home        |
++---------------+-------------------+-------------+---------+--------------------------+-------------+-------------+
+1 row in set (0.00 sec)
+
++--------------+-------------+
+| phone_number | designation |
++--------------+-------------+
+| 555-555-5555 | home        |
++--------------+-------------+
+1 row in set (0.00 sec)
+
+-- search where input = 'evil'
+
+-- nothing in employer
+
+Empty set (0.00 sec)
+
+Empty set (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+-- or employer_category
+
+Empty set (0.00 sec)
+
+Empty set (0.00 sec)
+
+-- two hits from posting
+
++---------------------+------------+----------------------+----------------------------------------------------------------------------------------------+--------------------+
+| posting_time        | close_time | title                | description                                                                                  | number_of_openings |
++---------------------+------------+----------------------+----------------------------------------------------------------------------------------------+--------------------+
+| 2020-08-09 17:26:00 | NULL       | Not an Evil Position | Seriously guys, we are not evil.                                                             |               1001 |
+| 2020-08-09 17:26:01 | NULL       | Hired Goon           | Brutish thug needed for low-level enforcing and general executing of totally not evil plans. |                  1 |
++---------------------+------------+----------------------+----------------------------------------------------------------------------------------------+--------------------+
+2 rows in set (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+-- keep a record of the search
+
++-----------+---------+-------+---------------------+
+| search_id | user_id | input | search_time         |
++-----------+---------+-------+---------------------+
+|         1 |      12 | evil  | 2020-08-09 17:26:01 |
++-----------+---------+-------+---------------------+
+1 row in set (0.00 sec)
+
+-- and the results it yielded
+
++-------------+------------+-----------+
+| employer_id | posting_id | search_id |
++-------------+------------+-----------+
+|          11 |          1 |         1 |
+|          11 |          2 |         1 |
++-------------+------------+-----------+
+2 rows in set (0.00 sec)
+
+-- application before adding a new application
+
++---------------+----------------+-------------+------------+---------------------+---------------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time          |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+|             6 |              1 |          -1 |          1 | 2020-08-09 17:25:30 | NULL                |
+|             6 |              2 |          11 |          1 | 2020-08-09 17:26:00 | 2020-08-09 17:26:00 |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL                |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL                |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+4 rows in set (0.00 sec)
+
+-- add a new application
+
+Query OK, 1 row affected (0.01 sec)
+
++---------------+----------------+-------------+------------+---------------------+---------------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time          |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+|             6 |              1 |          -1 |          1 | 2020-08-09 17:25:30 | NULL                |
+|             6 |              2 |          11 |          1 | 2020-08-09 17:26:00 | 2020-08-09 17:26:00 |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL                |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL                |
+|            12 |              1 |          11 |          2 | 2020-08-09 17:26:01 | NULL                |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+5 rows in set (0.00 sec)
+
+-- make an offer on the new application
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------------+----------------+-------------+------------+---------------------+---------------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time          |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+|             6 |              1 |          -1 |          1 | 2020-08-09 17:25:30 | NULL                |
+|             6 |              2 |          11 |          1 | 2020-08-09 17:26:00 | 2020-08-09 17:26:00 |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL                |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL                |
+|            12 |              1 |          11 |          2 | 2020-08-09 17:26:01 | 2020-08-09 17:26:01 |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+5 rows in set (0.00 sec)
+
+-- withdraw application, reject offer, and accept offer
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------------+----------------+-------------+------------+---------------------+---------------------+
+| job_seeker_id | application_id | employer_id | posting_id | application_time    | offer_time          |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+|             6 |              1 |          -1 |          1 | NULL                | NULL                |
+|             6 |              2 |          11 |          1 | 9999-12-31 23:59:59 | 2020-08-09 17:26:00 |
+|             8 |              1 |           3 |          2 | 2020-08-09 17:25:30 | NULL                |
+|            10 |              1 |           5 |          3 | 2020-08-09 17:25:30 | NULL                |
+|            12 |              1 |          11 |          2 | 1000-01-01 00:00:00 | 2020-08-09 17:26:01 |
++---------------+----------------+-------------+------------+---------------------+---------------------+
+5 rows in set (0.00 sec)
+
+-- delete employee profie (set description to null and remove contact information) where user_id = -7
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+| job_seeker_id | first_name | last_name | description                                                 | job_seeker_tier |
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+|            -7 | Jax        | Christian | NULL                                                        |               0 |
+|             6 | Jake       | Chris     | Construction enthusiast                                     |               0 |
+|             8 | Jay        | Cris      | Physics teacher                                             |               1 |
+|             9 | Jesse      | Pinkman   | Lab assistant                                               |               1 |
+|            10 | Elaine     | Benes     | Fun at parties                                              |               2 |
+|            12 | Joe        | Bunter    | Goon for hire: seeking a non-evil entity to do bidding for. |               2 |
++---------------+------------+-----------+-------------------------------------------------------------+-----------------+
+6 rows in set (0.00 sec)
+
++---------+---------------+--------------------------------+----------------+---------------------------+--------------------------+-------------+---------------+
+| user_id | street_number | street_name                    | city           | state                     | country                  | postal_code | designation   |
++---------+---------------+--------------------------------+----------------+---------------------------+--------------------------+-------------+---------------+
+|      -1 |         27527 | Shoshone                       | Atlanta        | Georgia                   | United States            | 30351       | work          |
+|       2 |             0 | Waxwing                        | Rockford       | Illinois                  | United States            | 61105       | home          |
+|       3 |          7838 | Evergreen                      | Phoenix        | Arizona                   | United States            | 85025       | home          |
+|       4 |             9 | Killdeer                       | Ladysmith      | British Columbia          | Canada                   | NULL        | home          |
+|       5 |            88 | Towne                          | Seattle        | Washington                | United States            | 98104       | work          |
+|       6 |         79108 | Vermont                        | Barrie         | Ontario                   | Canada                   | L9J         | home          |
+|       8 |          1754 | Hanson                         | Marystown      | Newfoundland and Labrador | Canada                   | L2N         | NULL          |
+|       9 |          1695 | Lakeland                       | Albuquerque    | New Mexico                | United States            | 87105       | work          |
+|      10 |         52440 | Merry                          | Arlington      | Texas                     | United States            | 76011       | home          |
+|      11 |          5555 | Paved with Good Intentions Rd. | Silicon Valley | CA                        | United States            | 12345       | not evil lair |
+|      12 |            42 | Evergreen Terrace              | Springfield    | Unknown                   | United States...probably | 55555       | home          |
++---------+---------------+--------------------------------+----------------+---------------------------+--------------------------+-------------+---------------+
+11 rows in set (0.00 sec)
+
++---------+----------------+---------------+
+| user_id | phone_number   | designation   |
++---------+----------------+---------------+
+|      -1 | 5623560622     | work          |
+|       2 | 4473604365     | home          |
+|       3 | 3695527831     | mobile        |
+|       4 | 4344699876     | home          |
+|       5 | 5369351277     | work          |
+|       6 | 5087655329     | mobile        |
+|       8 | 2618996475     | home          |
+|       9 | 3605600615     | mobile        |
+|      10 | 6072920866     | work          |
+|      11 | 1-800-NOT-EVIL | not evil lair |
+|      12 | 555-555-5555   | home          |
++---------+----------------+---------------+
+11 rows in set (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+-- report of all applications made by an employee where job_seeker_id = 12 within time interval 1000-01-01 and 9999-12-31
+
++------------+----------------------------------------------------------------------------------------------+---------------------+---------------------+---------------------+
+| title      | description                                                                                  | application_time    | offer_time          | close_time          |
++------------+----------------------------------------------------------------------------------------------+---------------------+---------------------+---------------------+
+| Hired Goon | Brutish thug needed for low-level enforcing and general executing of totally not evil plans. | 1000-01-01 00:00:00 | 2020-08-09 17:26:01 | 2020-08-09 17:26:01 |
++------------+----------------------------------------------------------------------------------------------+---------------------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+-- payment_method before adding a new method
+
++---------+-----------+----------------+--------------+
+| user_id | method_id | account_number | is_automatic |
++---------+-----------+----------------+--------------+
+|      -7 |         1 | 26-721-5240    |            0 |
+|      -1 |         1 | 34-175-9681    |            0 |
+|       2 |         1 | 22-867-5650    |            0 |
+|       3 |         1 | 22-796-6933    |            0 |
+|       4 |         1 | 38-616-9923    |            0 |
+|       5 |         1 | 57-972-6811    |            0 |
+|       6 |         1 | 21-487-4424    |            0 |
+|       8 |         1 | 16-976-3616    |            0 |
+|       9 |         1 | 50-151-9909    |            0 |
+|      10 |         1 | 55-342-6162    |            0 |
++---------+-----------+----------------+--------------+
+10 rows in set (0.00 sec)
+
+-- add a new payment method
+
+Query OK, 1 row affected (0.00 sec)
+
+-- make it automatic
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------+-----------+----------------------+--------------+
+| user_id | method_id | account_number       | is_automatic |
++---------+-----------+----------------------+--------------+
+|      -7 |         1 | 26-721-5240          |            0 |
+|      -1 |         1 | 34-175-9681          |            0 |
+|       2 |         1 | 22-867-5650          |            0 |
+|       3 |         1 | 22-796-6933          |            0 |
+|       4 |         1 | 38-616-9923          |            0 |
+|       5 |         1 | 57-972-6811          |            0 |
+|       6 |         1 | 21-487-4424          |            0 |
+|       8 |         1 | 16-976-3616          |            0 |
+|       9 |         1 | 50-151-9909          |            0 |
+|      10 |         1 | 55-342-6162          |            0 |
+|      11 |         1 | stash-of-krugerrands |            1 |
++---------+-----------+----------------------+--------------+
+11 rows in set (0.00 sec)
+
+-- remove payment method belonging to user where user_id = -1
+Query OK, 1 row affected (0.01 sec)
+
++---------+-----------+----------------------+--------------+
+| user_id | method_id | account_number       | is_automatic |
++---------+-----------+----------------------+--------------+
+|      -7 |         1 | 26-721-5240          |            0 |
+|       2 |         1 | 22-867-5650          |            0 |
+|       3 |         1 | 22-796-6933          |            0 |
+|       4 |         1 | 38-616-9923          |            0 |
+|       5 |         1 | 57-972-6811          |            0 |
+|       6 |         1 | 21-487-4424          |            0 |
+|       8 |         1 | 16-976-3616          |            0 |
+|       9 |         1 | 50-151-9909          |            0 |
+|      10 |         1 | 55-342-6162          |            0 |
+|      11 |         1 | stash-of-krugerrands |            1 |
++---------+-----------+----------------------+--------------+
+10 rows in set (0.00 sec)
+
+-- edit payment_method where user_id = 11
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------+-----------+---------------------------------+--------------+
+| user_id | method_id | account_number                  | is_automatic |
++---------+-----------+---------------------------------+--------------+
+|      -7 |         1 | 26-721-5240                     |            0 |
+|       2 |         1 | 22-867-5650                     |            0 |
+|       3 |         1 | 22-796-6933                     |            0 |
+|       4 |         1 | 38-616-9923                     |            0 |
+|       5 |         1 | 57-972-6811                     |            0 |
+|       6 |         1 | 21-487-4424                     |            0 |
+|       8 |         1 | 16-976-3616                     |            0 |
+|       9 |         1 | 50-151-9909                     |            0 |
+|      10 |         1 | 55-342-6162                     |            0 |
+|      11 |         1 | super-secret-swiss-bank-account |            0 |
++---------+-----------+---------------------------------+--------------+
+10 rows in set (0.00 sec)
+
+
+Query OK, 1 row affected (0.00 sec)
+
+-- payment before adding a new payment
++------------+---------+-----------+----------------+---------------------+
+| payment_id | user_id | method_id | payment_amount | payment_time        |
++------------+---------+-----------+----------------+---------------------+
+|          1 |       4 |         1 |          20.00 | 2020-08-09 17:25:30 |
+|          2 |       5 |         1 |          60.80 | 2020-08-09 17:25:30 |
+|          3 |    NULL |      NULL |          22.08 | 2020-08-09 17:25:30 |
+|          4 |       8 |         1 |           5.41 | 2020-08-09 17:25:30 |
+|          5 |       6 |         1 |          19.91 | 2020-08-09 17:25:30 |
+|          6 |       2 |         1 |         100.00 | 2020-08-09 17:25:30 |
+|          7 |       9 |         1 |          50.00 | 2020-08-09 17:25:30 |
+|          8 |      10 |         1 |          49.99 | 2020-08-09 17:25:30 |
++------------+---------+-----------+----------------+---------------------+
+8 rows in set (0.00 sec)
+
+-- add a new payment where user_id = 11 and amount = 99
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++------------+---------+-----------+----------------+---------------------+
+| payment_id | user_id | method_id | payment_amount | payment_time        |
++------------+---------+-----------+----------------+---------------------+
+|          1 |       4 |         1 |          20.00 | 2020-08-09 17:25:30 |
+|          2 |       5 |         1 |          60.80 | 2020-08-09 17:25:30 |
+|          3 |    NULL |      NULL |          22.08 | 2020-08-09 17:25:30 |
+|          4 |       8 |         1 |           5.41 | 2020-08-09 17:25:30 |
+|          5 |       6 |         1 |          19.91 | 2020-08-09 17:25:30 |
+|          6 |       2 |         1 |         100.00 | 2020-08-09 17:25:30 |
+|          7 |       9 |         1 |          50.00 | 2020-08-09 17:25:30 |
+|          8 |      10 |         1 |          49.99 | 2020-08-09 17:25:30 |
+|          9 |      11 |         1 |          99.00 | 2020-08-09 17:26:01 |
++------------+---------+-----------+----------------+---------------------+
+9 rows in set (0.00 sec)
+
+-- report employer administrative information (a non-null status indicates account is frozen)
+
++---------------+--------------------+---------------------+---------+
+| employer_name | email              | status              | balance |
++---------------+--------------------+---------------------+---------+
+| Eng Inc.      | eng@gmail.com      | NULL                |    0.00 |
+| WW Ltd        | babyblue@gmail.com | NULL                |    0.00 |
+| Mr. Pitt      | mpitt@yahoo.com    | NULL                |  -39.20 |
+| Google        | not.evil@gmail.com | 2020-08-09 17:26:01 |   -1.00 |
++---------------+--------------------+---------------------+---------+
+4 rows in set (0.00 sec)
+
+-- report all employer categories to administrators
+
++-------------+---------------------------------+
+| employer_id | category                        |
++-------------+---------------------------------+
+|          -1 | Toys                            |
+|           2 | Engineering                     |
+|           3 | Scholastic Pursuits             |
+|           4 | Fat Stacks                      |
+|           5 | Unbearably Obtuse               |
+|          11 | Making the World a Safer Search |
++-------------+---------------------------------+
+6 rows in set (0.00 sec)
+
+-- report employee administrative information
+
++------------+-----------+----------------------+--------+---------+
+| first_name | last_name | email                | status | balance |
++------------+-----------+----------------------+--------+---------+
+| Jake       | Chris     | jc@gmail.com         | NULL   |   -0.09 |
+| Jay        | Cris      | jc@google.cn         | NULL   |   -4.59 |
+| Jesse      | Pinkman   | pinkmanabq@gmail.com | NULL   |    0.00 |
+| Elaine     | Benes     | eb@hotmail.com.com   | NULL   |   -0.01 |
++------------+-----------+----------------------+--------+---------+
+4 rows in set (0.00 sec)
+
+-- report information of employers with a negative balance
+
++---------------+--------------------+---------+---------------------+
+| employer_name | email              | balance | frozen_time         |
++---------------+--------------------+---------+---------------------+
+| Mr. Pitt      | mpitt@yahoo.com    |  -39.20 | NULL                |
+| Google        | not.evil@gmail.com |   -1.00 | 2020-08-09 17:26:01 |
++---------------+--------------------+---------+---------------------+
+2 rows in set (0.00 sec)
+
+-- report information of employees with a negative balance
+
++------------+-----------+--------------------+---------+-------------+
+| first_name | last_name | email              | balance | frozen_time |
++------------+-----------+--------------------+---------+-------------+
+| Jake       | Chris     | jc@gmail.com       |   -0.09 | NULL        |
+| Jay        | Cris      | jc@google.cn       |   -4.59 | NULL        |
+| Elaine     | Benes     | eb@hotmail.com.com |   -0.01 | NULL        |
++------------+-----------+--------------------+---------+-------------+
+3 rows in set (0.01 sec)
