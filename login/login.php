@@ -22,7 +22,7 @@
         if($count > 0)
             {
                  $_SESSION["username"] = $username;
-                 header("location:login_success.php");
+                 header("location:../admin/index.php");
             }
         else
             {
