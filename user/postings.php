@@ -83,7 +83,7 @@ include ('./has/head.php');
                                 <td><?= $post->description ?></td>
                                 <td><?= $post->number_of_openings ?></td>
                                 <td>
-                                <button onclick="window.location.href='apply.php?posting_id=<?= $post->title?>'" class="btn btn-info" style="width: 100%; color: white;" 
+                                <button onclick="window.location.href='apply.php?posting_id=<?= $post->posting_id?>'" class="btn btn-info" style="width: 100%; color: white;" 
                                     <?= (($tier=='0' or ($tier=='1' and (int)$num_applications > 4)) ? 'disabled' : '') ?>>Apply</a>
                                 </button>
                             </tr>
